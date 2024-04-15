@@ -1,0 +1,10 @@
+.container-page{overflow: visible}
+.mp-menu{display: none}
+.mod-header .header-content{
+    padding:0 !important;
+}
+
+.nav{
+    margin: 0 !important;
+    padding: 0 !important;
+}

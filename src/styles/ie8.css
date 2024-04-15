@@ -1,0 +1,61 @@
+
+.container-page{overflow: visible}
+.mp-menu{display: none}
+
+.mod-filter{
+    border-bottom: 1px solid #f1f1f1;
+}
+.mod-filter .txt-search:focus,
+.mod-email-newsletter .wrap-email input:focus,
+.select-cate .dropdown-cate,
+.mod-search .keyword-search:focus,
+.form .txt-ct:focus{
+    border: 1px solid #f6e1a8;
+}
+.mod-search .keyword-search,
+.form .txt-ct{
+    border: 1px solid #f2f2f2;
+}
+#main-menu > li.has-sub:hover{
+    border: 1px solid #f6e1a8;
+    margin-left: 0;
+    margin-top: -7px;
+}
+#main-menu > li > .sub-menu{
+    border: 1px solid #f6e1a8;
+    left: -1px;
+}
+.mod-header .header-content{
+    padding:0 !important;
+}
+
+.nav{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.gray .mod-footer .footer-top{
+    /*background-image: none;*/
+    background-repeat: no-repeat;
+    /*background: */
+}
+
+.gray .mod-footer .footer-top{
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/bk-footer-dark.png', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/bk-footer-dark.png', sizingMethod='scale')";
+}
+.dark .mod-footer .footer-top{
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/bk-footer-dark.png', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/bk-footer-dark.png', sizingMethod='scale')";
+}
+/*
+.ver_hold {
+    width:0;
+    height:100%;
+    display:inline-block;
+    vertical-align:middle;
+}
+.ver_container {
+    width:100%;
+    display:inline-block;
+    vertical-align:middle;
+}*/
