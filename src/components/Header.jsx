@@ -48,12 +48,12 @@ const Header = () => {
 										<a href="/coupon-code">Coupons Code</a>
 										<ul className="sub-menu">
 											<li>
-												<a href="/coupon-code?id=1">
+												<a href="/coupon-code">
 													Coupons Code 1
 												</a>
 											</li>
 											<li>
-												<a href="/coupon-code?id=2">
+												<a href="/coupon-code-2">
 													Coupons Code 2
 												</a>
 											</li>

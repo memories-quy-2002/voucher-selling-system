@@ -22,6 +22,7 @@ import "./styles/style.css";
 import BlogDetail from "./components/BlogDetail";
 import BrandDetail from "./components/BrandDetail";
 import CouponDetail from "./components/CouponDetail";
+import CouponCodeTwo from "./components/CouponCodeTwo";
 
 function App() {
 	return (
@@ -35,6 +36,7 @@ function App() {
 				<Route path="/coupon" element={<Coupon />} />
 				<Route path="/coupon-detail" element={<CouponDetail />} />
 				<Route path="/coupon-code" element={<CouponCode />} />
+				<Route path="/coupon-code-2" element={<CouponCodeTwo />} />
 				<Route path="/my-coupon" element={<MyCoupon />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />

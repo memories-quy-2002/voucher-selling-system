@@ -1,7 +1,11 @@
 import React from "react";
 import Filter from "./Filter";
+import Pagination from "./Pagination";
 
 const CouponCodeOne = () => {
+	const url = new URLSearchParams(window.location.search);
+	const page = parseInt(url.get("page"));
+	console.log(page);
 	return (
 		<>
 			<div>
@@ -541,29 +545,7 @@ const CouponCodeOne = () => {
 										</div>
 										{/*end: .coupons-code-item */}
 									</div>
-									<div className="pagination">
-										<a className="page-nav" href="#">
-											<i className="icon iPrev" />
-										</a>
-										<a className="page-num active" href="#">
-											1
-										</a>
-										<a className="page-num" href="#">
-											2
-										</a>
-										<a className="page-num" href="#">
-											3
-										</a>
-										<a className="page-num" href="#">
-											4
-										</a>
-										<a className="page-num" href="#">
-											5
-										</a>
-										<a className="page-nav" href="#">
-											<i className="icon iNext" />
-										</a>
-									</div>
+									<Pagination page={page} />
 								</div>
 								{/*end: .mod-coupons-code */}
 							</div>

@@ -1,18 +1,13 @@
 import React from "react";
 import Layout from "./Layout";
 import Aside from "./Aside";
+import Pagination from "./Pagination";
 
 const Blog = () => {
 	const url = new URLSearchParams(window.location.search);
 	const page = parseInt(url.get("page"));
 	console.log(page);
-	const pageArray =
-		page <= 3
-			? [1, 2, 3, 4, 5]
-			: page >= 13
-			? [11, 12, 13, 14, 15]
-			: [page - 2, page - 1, page, page + 1, page + 2];
-	console.log(pageArray);
+
 	return (
 		<Layout>
 			<div>
@@ -231,35 +226,7 @@ const Blog = () => {
 										</div>
 										{/*end: article-item */}
 									</div>
-									<div className="pagination">
-										{page > 3 && (
-											<a
-												className="txt-nav"
-												href={`?page=${page - 1}`}
-											>
-												Newer post
-											</a>
-										)}
-
-										{pageArray.map((num) => (
-											<a
-												className={`page-num ${
-													num === page ? "active" : ""
-												}`}
-												href={`?page=${num}`}
-											>
-												{num}
-											</a>
-										))}
-										{page < 13 && (
-											<a
-												className="txt-nav"
-												href={`?page=${page + 1}`}
-											>
-												Older post
-											</a>
-										)}
-									</div>
+									<Pagination page={page} />
 								</div>
 								{/*end: .mod-list-article */}
 							</div>
