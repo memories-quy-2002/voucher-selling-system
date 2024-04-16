@@ -5,10 +5,8 @@ import couponsData from "../components/coupons.json";
 const CouponDetail = () => {
 	const url = new URLSearchParams(window.location.search);
 	const id = parseInt(url.get("id"));
-	console.log(id);
 	const allCoupons = couponsData.new.concat(couponsData.featured);
 	const couponDetail = allCoupons.filter((coupon) => coupon.id === id)[0];
-	console.log(couponDetail);
 	return (
 		<Layout>
 			<div className="top-area">

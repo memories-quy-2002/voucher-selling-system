@@ -540,6 +540,8 @@ a.be-fc-default:hover {
 }
 
 .btn-discard {
+	width: 100%;
+	border: none;
 	display: block;
 	padding: 6px 2px;
 	background: #cccccc;
@@ -914,7 +916,6 @@ b {
 	background: transparent url("../images/icon.png?v=0.0121989") no-repeat;
 	border: none;
 	display: inline-block;
-	display: inline;
 	zoom: 1;
 }
 .iPickRed {
@@ -1467,7 +1468,7 @@ b {
 	background: #bbbbbb;
 	color: #ffffff;
 	font-size: 1.230769230769231em;
-	margin: 0 -2px 0 0;
+	margin: 0 2px 0 0;
 	width: 50px;
 	border-radius: 0 4px 4px 0;
 	padding: 2px 0;
@@ -1600,13 +1601,9 @@ b {
 /* 10.	Header
 --------------------------------------------------------------------------------*/
 .mod-header {
-	padding-bottom: 15px;
 	box-shadow: 0 5px 3px rgba(0, 0, 0, 0.05);
 	position: relative;
 	z-index: 5;
-}
-.mod-header .header-content {
-	margin-top: 14px;
 }
 #logo {
 	float: left;
@@ -3234,7 +3231,7 @@ b {
 	padding: 10px;
 	width: 100%;
 	border: 1px solid #bbbbbb;
-	color: #bababa;
+	color: black;
 	font-family: "Open Sans", sans-serif;
 	font-size: 1.230769230769231em;
 	border-radius: 6px;

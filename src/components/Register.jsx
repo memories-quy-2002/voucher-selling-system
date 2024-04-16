@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "./Layout";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+	const navigate = useNavigate();
+	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [checked, setChecked] = useState(false);
+	const handleSubmit = async () => {
+		try {
+			const response = await axios.post(
+				"http://localhost:4000/api/user/create",
+				{ username, email, password }
+			);
+			if (response.status === 200) {
+				console.log(response.data.msg);
+				navigate("/");
+			}
+		} catch (err) {
+			console.error(err);
+		}
+	};
 	return (
 		<Layout>
 			<div className="grid_frame page-content">
@@ -21,13 +42,32 @@ const Register = () => {
 								<div className="left-form">
 									<label
 										className="wrap-txt"
+										htmlFor="sys_username"
+									>
+										<input
+											className="input-txt"
+											id="sys_username"
+											type="text"
+											placeholder="Your username"
+											value={username}
+											onChange={(e) =>
+												setUsername(e.target.value)
+											}
+										/>
+									</label>
+									<label
+										className="wrap-txt"
 										htmlFor="sys_email"
 									>
 										<input
 											className="input-txt"
 											id="sys_email"
 											type="email"
-											placeholder="you@mail.com"
+											placeholder="Your email"
+											value={email}
+											onChange={(e) =>
+												setEmail(e.target.value)
+											}
 										/>
 									</label>
 									<label
@@ -38,22 +78,14 @@ const Register = () => {
 											className="input-txt"
 											id="sys_pass"
 											type="password"
-											placeholder="password please!"
+											placeholder="Your password"
+											value={password}
+											onChange={(e) =>
+												setPassword(e.target.value)
+											}
 										/>
 									</label>
-									<label
-										className="wrap-check"
-										htmlFor="sys_chk_news"
-									>
-										<input
-											id="sys_chk_news"
-											className="input-chk"
-											type="checkbox"
-										/>{" "}
-										Send me the weekly Couponday.com’s
-										offers.
-										<i className="icon iUncheck" />
-									</label>
+
 									<label
 										className="wrap-check"
 										htmlFor="sys_chk_agree"
@@ -62,6 +94,12 @@ const Register = () => {
 											id="sys_chk_agree"
 											className="input-chk"
 											type="checkbox"
+											checked={checked}
+											onChange={() =>
+												setChecked(
+													(checked) => !checked
+												)
+											}
 										/>{" "}
 										I agree to the{" "}
 										<a href="#">Terms of Use</a> and{" "}
@@ -73,6 +111,7 @@ const Register = () => {
 									<button
 										className="btn-flat yellow btn-submit-reg"
 										type="submit"
+										onClick={() => handleSubmit()}
 									>
 										Create an account
 									</button>

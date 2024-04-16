@@ -1,6 +1,6 @@
 import React from "react";
 
-const CouponItem = ({ coupon }) => {
+const CouponItem = ({ coupon, onTakeCoupon, onDismissCoupon }) => {
 	const { id, image, price, brand, desc, days, hours, isTaken, isSale } =
 		coupon;
 	return (
@@ -27,11 +27,17 @@ const CouponItem = ({ coupon }) => {
 					{days} days {hours} hours left
 				</div>
 				{isTaken ? (
-					<button class="btn btn-blue btn-take-coupon untake">
+					<button
+						class="btn btn-blue btn-take-coupon untake"
+						onClick={onDismissCoupon}
+					>
 						Un Take Coupon
 					</button>
 				) : (
-					<button className="btn btn-blue btn-take-coupon">
+					<button
+						className="btn btn-blue btn-take-coupon"
+						onClick={onTakeCoupon}
+					>
 						Take Coupon
 					</button>
 				)}

@@ -1,11 +1,24 @@
-import React from "react";
-import Filter from "./Filter";
+import React, { useState } from "react";
 import Pagination from "./Pagination";
 
 const CouponCodeOne = () => {
 	const url = new URLSearchParams(window.location.search);
 	const page = parseInt(url.get("page"));
-	console.log(page);
+	const [codes, setCodes] = useState({}); // Object to store code for each button ID
+
+	const generateCode = (buttonId) => {
+		const characters =
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		let result = "";
+		const charactersLength = characters.length;
+		for (let i = 0; i < 8; i++) {
+			result += characters.charAt(
+				Math.floor(Math.random() * charactersLength)
+			);
+		}
+		console.log(result);
+		setCodes((prevCodes) => ({ ...prevCodes, [buttonId]: result })); // Update specific key-value pair
+	};
 	return (
 		<>
 			<div>
@@ -18,7 +31,9 @@ const CouponCodeOne = () => {
 						</div>
 					</div>
 				</div>
-				<Filter />
+				<div id="sys_mod_filter" className="mod-filter">
+					{" "}
+				</div>
 				{/*end: .mod-filter */}
 				<div className="grid_frame page-content">
 					<div className="container_grid">
@@ -72,13 +87,25 @@ const CouponCodeOne = () => {
 															</span>
 														</span>
 													</div>
-													<a
-														className="btn btn-blue btn-view-coupon"
-														href="#"
-													>
-														VIEW <span>COUPON</span>{" "}
-														CODE
-													</a>
+													{codes[1] ? (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															disabled
+														>
+															{codes[1]}
+														</button>
+													) : (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															onClick={() =>
+																generateCode(
+																	"1"
+																)
+															}
+														>
+															VIEW COUPON CODE
+														</button>
+													)}
 												</div>
 											</div>
 										</div>
@@ -130,13 +157,25 @@ const CouponCodeOne = () => {
 															</span>
 														</span>
 													</div>
-													<a
-														className="btn btn-blue btn-view-coupon"
-														href="#"
-													>
-														VIEW <span>COUPON</span>{" "}
-														CODE
-													</a>
+													{codes[2] ? (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															disabled
+														>
+															{codes[2]}
+														</button>
+													) : (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															onClick={() =>
+																generateCode(
+																	"2"
+																)
+															}
+														>
+															VIEW COUPON CODE
+														</button>
+													)}
 												</div>
 											</div>
 										</div>
@@ -187,13 +226,25 @@ const CouponCodeOne = () => {
 															</span>
 														</span>
 													</div>
-													<a
-														className="btn btn-blue btn-view-coupon"
-														href="#"
-													>
-														VIEW <span>COUPON</span>{" "}
-														CODE
-													</a>
+													{codes[3] ? (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															disabled
+														>
+															{codes[3]}
+														</button>
+													) : (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															onClick={() =>
+																generateCode(
+																	"3"
+																)
+															}
+														>
+															VIEW COUPON CODE
+														</button>
+													)}
 												</div>
 											</div>
 										</div>
@@ -245,13 +296,25 @@ const CouponCodeOne = () => {
 															</span>
 														</span>
 													</div>
-													<a
-														className="btn btn-blue btn-view-coupon"
-														href="#"
-													>
-														VIEW <span>COUPON</span>{" "}
-														CODE
-													</a>
+													{codes[4] ? (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															disabled
+														>
+															{codes[4]}
+														</button>
+													) : (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															onClick={() =>
+																generateCode(
+																	"4"
+																)
+															}
+														>
+															VIEW COUPON CODE
+														</button>
+													)}
 												</div>
 											</div>
 										</div>
@@ -302,13 +365,25 @@ const CouponCodeOne = () => {
 															</span>
 														</span>
 													</div>
-													<a
-														className="btn btn-blue btn-view-coupon"
-														href="#"
-													>
-														VIEW <span>COUPON</span>{" "}
-														CODE
-													</a>
+													{codes[5] ? (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															disabled
+														>
+															{codes[5]}
+														</button>
+													) : (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															onClick={() =>
+																generateCode(
+																	"5"
+																)
+															}
+														>
+															VIEW COUPON CODE
+														</button>
+													)}
 												</div>
 											</div>
 										</div>
@@ -360,13 +435,25 @@ const CouponCodeOne = () => {
 															</span>
 														</span>
 													</div>
-													<a
-														className="btn btn-blue btn-view-coupon"
-														href="#"
-													>
-														VIEW <span>COUPON</span>{" "}
-														CODE
-													</a>
+													{codes[6] ? (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															disabled
+														>
+															{codes[6]}
+														</button>
+													) : (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															onClick={() =>
+																generateCode(
+																	"6"
+																)
+															}
+														>
+															VIEW COUPON CODE
+														</button>
+													)}
 												</div>
 											</div>
 										</div>
@@ -417,13 +504,25 @@ const CouponCodeOne = () => {
 															</span>
 														</span>
 													</div>
-													<a
-														className="btn btn-blue btn-view-coupon"
-														href="#"
-													>
-														VIEW <span>COUPON</span>{" "}
-														CODE
-													</a>
+													{codes[7] ? (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															disabled
+														>
+															{codes[7]}
+														</button>
+													) : (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															onClick={() =>
+																generateCode(
+																	"7"
+																)
+															}
+														>
+															VIEW COUPON CODE
+														</button>
+													)}
 												</div>
 											</div>
 										</div>
@@ -475,13 +574,25 @@ const CouponCodeOne = () => {
 															</span>
 														</span>
 													</div>
-													<a
-														className="btn btn-blue btn-view-coupon"
-														href="#"
-													>
-														VIEW <span>COUPON</span>{" "}
-														CODE
-													</a>
+													{codes[8] ? (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															disabled
+														>
+															{codes[8]}
+														</button>
+													) : (
+														<button
+															className="btn btn-blue btn-view-coupon"
+															onClick={() =>
+																generateCode(
+																	"8"
+																)
+															}
+														>
+															VIEW COUPON CODE
+														</button>
+													)}
 												</div>
 											</div>
 										</div>
@@ -533,13 +644,9 @@ const CouponCodeOne = () => {
 															</span>
 														</span>
 													</div>
-													<a
-														className="btn btn-blue btn-view-coupon"
-														href="#"
-													>
-														VIEW <span>COUPON</span>{" "}
-														CODE
-													</a>
+													<button className="btn btn-blue btn-view-coupon">
+														VIEW COUPON CODE
+													</button>
 												</div>
 											</div>
 										</div>
@@ -565,6 +672,11 @@ const CouponCodeOne = () => {
 												type="search"
 												placeholder="Search"
 											/>
+											<input
+												type="submit"
+												class="btn-search"
+												value=""
+											></input>
 										</label>
 									</div>
 								</div>

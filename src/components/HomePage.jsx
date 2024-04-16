@@ -1,12 +1,94 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Toast, ToastContainer } from "react-bootstrap";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import couponsData from "../components/coupons.json";
 import CouponItem from "./CouponItem";
 import Filter from "./Filter";
 import Layout from "./Layout";
 
 const HomePage = () => {
+	const [couponsData, setCouponsData] = useState({
+		new: [],
+		featured: [],
+		"my-coupon": [],
+	});
+	const [showToast, setShowToast] = useState(false);
+	const [message, showMessage] = useState("");
+
+	useEffect(() => {
+		const coupons = require("./coupons.json");
+		setCouponsData(coupons);
+	}, []);
+
+	const onTakeCoupon = async (couponId) => {
+		const updatedCoupons = { ...couponsData }; // Create a copy
+		const foundCoupon =
+			updatedCoupons.new.find((coupon) => coupon.id === couponId) ||
+			updatedCoupons.featured.find((coupon) => coupon.id === couponId);
+		if (foundCoupon) {
+			try {
+				foundCoupon.isTaken = true;
+				updatedCoupons["my-coupon"].push(foundCoupon);
+				setCouponsData(updatedCoupons); // Update state with modified data
+				console.log(updatedCoupons);
+				const response = await axios.post(
+					"http://localhost:4000/api/update",
+					updatedCoupons
+				);
+				if (response.status === 200) {
+					showMessage(response.data.msg);
+					setShowToast(true); // Show the toast immediately
+
+					setTimeout(() => {
+						setShowToast(false);
+					}, 5000); // 5 seconds in milliseconds
+				}
+			} catch (err) {
+				console.error(err);
+			}
+		} else {
+			alert("Coupon with ID " + couponId + " not found.");
+		}
+	};
+	const onDismissCoupon = async (couponId) => {
+		const updatedCoupons = { ...couponsData }; // Create a copy
+		const foundCoupon =
+			updatedCoupons.new.find((coupon) => coupon.id === couponId) ||
+			updatedCoupons.featured.find((coupon) => coupon.id === couponId);
+		if (foundCoupon) {
+			try {
+				foundCoupon.isTaken = false;
+				// const newCoupons = updatedCoupons["my-coupon"].filter(
+				// 	(item) => item.id !== foundCoupon.id
+				// );
+				const index = updatedCoupons["my-coupon"].indexOf(foundCoupon);
+				const newCoupons = updatedCoupons["my-coupon"].splice(index, 1);
+				console.log("New coupons: ", newCoupons);
+				setCouponsData((previousCoupons) => ({
+					...previousCoupons,
+					"my-coupon": newCoupons,
+				}));
+				console.log(couponsData);
+				const response = await axios.post(
+					"http://localhost:4000/api/delete",
+					couponsData
+				);
+				if (response.status === 200) {
+					showMessage(response.data.msg);
+					setShowToast(true); // Show the toast immediately
+
+					setTimeout(() => {
+						setShowToast(false);
+					}, 5000); // 5 seconds in milliseconds
+				}
+			} catch (err) {
+				console.error(err);
+			}
+		} else {
+			alert("Coupon with ID " + couponId + " not found.");
+		}
+	};
 	return (
 		<div className="container-page">
 			<div className="mp-pusher" id="mp-pusher">
@@ -45,7 +127,9 @@ const HomePage = () => {
 							</div>
 						</div>
 					</div>
-					<Filter />
+					<div id="sys_mod_filter" className="mod-filter">
+						{" "}
+					</div>
 					{/*end: .mod-filter */}
 					<div className="grid_frame page-content">
 						<div className="container_grid">
@@ -65,6 +149,12 @@ const HomePage = () => {
 									<CouponItem
 										key={coupon.id}
 										coupon={coupon}
+										onTakeCoupon={() =>
+											onTakeCoupon(coupon.id)
+										}
+										onDismissCoupon={() =>
+											onDismissCoupon(coupon.id)
+										}
 									/>
 								))}
 							</div>
@@ -86,6 +176,12 @@ const HomePage = () => {
 										<CouponItem
 											key={coupon.id}
 											coupon={coupon}
+											onTakeCoupon={() =>
+												onTakeCoupon(coupon.id)
+											}
+											onDismissCoupon={() =>
+												onDismissCoupon(coupon.id)
+											}
 										/>
 									))}
 									{/*end: .coupon-item */}
@@ -251,6 +347,31 @@ const HomePage = () => {
 											</div>
 										</div>
 									</div>
+									<ToastContainer
+										className="p-3"
+										position={"bottom-end"}
+										style={{
+											zIndex: 1,
+											position: "fixed",
+											bottom: 0,
+											right: 0,
+										}}
+									>
+										<Toast
+											onClose={() => setShowToast(false)}
+											show={showToast}
+											delay={5000}
+											autohide
+											animation
+										>
+											<Toast.Header closeButton={true}>
+												<strong className="me-auto">
+													Notifications
+												</strong>
+											</Toast.Header>
+											<Toast.Body>{message}</Toast.Body>
+										</Toast>
+									</ToastContainer>
 									{/*end: .brand-item */}
 								</div>
 							</div>

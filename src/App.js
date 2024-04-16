@@ -8,21 +8,11 @@ import HomePage from "./components/HomePage";
 import Login from "./components/Login";
 import MyCoupon from "./components/MyCoupon";
 import Register from "./components/Register";
-import "./styles/font-awesome.css";
-import "./styles/font.css";
-import "./styles/jquery.nouislider.css";
-import "./styles/jquery.popupcommon.css";
-import "./styles/normalize.css";
-import "./styles/res-menu.css";
-import "./styles/responsive.css";
-import "./styles/slider.css";
-import "./styles/style-dark.css";
-import "./styles/style-gray.css";
-import "./styles/style.css";
 import BlogDetail from "./components/BlogDetail";
 import BrandDetail from "./components/BrandDetail";
 import CouponDetail from "./components/CouponDetail";
 import CouponCodeTwo from "./components/CouponCodeTwo";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
 	return (

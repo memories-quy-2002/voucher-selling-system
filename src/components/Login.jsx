@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "./Layout";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 	const navigate = useNavigate();
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [checked, setChecked] = useState(false);
+	const [errors, setErrors] = useState([]);
+	const accounts = require("./accounts.json");
+	const handleSubmit = () => {
+		const rightAccount =
+			accounts.username === username && accounts.password === password;
+
+		const isWebsiteLogged = accounts.isLoggedIn;
+		if (rightAccount && !isWebsiteLogged) {
+			accounts.isLoggedIn = true;
+			navigate("/");
+		} else {
+			setErrors([
+				"The username or password is incorrect. Please try again",
+			]);
+			setTimeout(() => {
+				setErrors([]);
+			}, 5000); // 5 seconds in milliseconds
+		}
+	};
 	return (
 		<Layout>
 			<div className="grid_frame page-content">
@@ -17,13 +39,17 @@ const Login = () => {
 								<div className="left-form">
 									<label
 										className="wrap-txt"
-										htmlFor="sys_email"
+										htmlFor="sys_username"
 									>
 										<input
 											className="input-txt"
-											id="sys_email"
-											type="email"
-											placeholder="you@mail.com"
+											id="sys_username"
+											type="text"
+											value={username}
+											onChange={(e) =>
+												setUsername(e.target.value)
+											}
+											placeholder="Your username"
 										/>
 									</label>
 									<label
@@ -34,7 +60,11 @@ const Login = () => {
 											className="input-txt"
 											id="sys_pass"
 											type="password"
-											placeholder="password please!"
+											value={password}
+											onChange={(e) =>
+												setPassword(e.target.value)
+											}
+											placeholder="Password"
 										/>
 									</label>
 									<label
@@ -45,6 +75,10 @@ const Login = () => {
 											id="sys_chk_news"
 											className="input-chk"
 											type="checkbox"
+											checked={checked}
+											onChange={(e) =>
+												setChecked(e.target.checked)
+											}
 										/>{" "}
 										Remember me
 										<i className="icon iUncheck" />
@@ -59,11 +93,16 @@ const Login = () => {
 										<button
 											className="btn-flat gr btn-submit-reg"
 											type="submit"
-											onClick={() => navigate("/")}
+											onClick={() => handleSubmit()}
 										>
 											Login
 										</button>
-										<div className="sep-connect">
+										{errors.map((error) => (
+											<div style={{ color: "red" }}>
+												{error}
+											</div>
+										))}
+										{/* <div className="sep-connect">
 											<span>Or</span>
 										</div>
 										<div className="grp-connect">
@@ -79,7 +118,7 @@ const Login = () => {
 											>
 												Google
 											</a>
-										</div>
+										</div> */}
 									</div>
 								</div>
 								<div className="right-create-acc">
