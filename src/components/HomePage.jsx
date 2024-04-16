@@ -4,7 +4,6 @@ import { Toast, ToastContainer } from "react-bootstrap";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import CouponItem from "./CouponItem";
-import Filter from "./Filter";
 import Layout from "./Layout";
 
 const HomePage = () => {
@@ -17,7 +16,7 @@ const HomePage = () => {
 	const [message, showMessage] = useState("");
 
 	useEffect(() => {
-		const coupons = require("./coupons.json");
+		const coupons = require("./vouchers.json");
 		setCouponsData(coupons);
 	}, []);
 
@@ -136,7 +135,7 @@ const HomePage = () => {
 							<div className="mod-grp-coupon block clearfix">
 								<div className="grid_12">
 									<h3 className="title-block has-link">
-										New Coupons
+										New Vouchers
 										<a
 											href="/coupon?id=1"
 											className="link-right"
@@ -162,7 +161,7 @@ const HomePage = () => {
 							<div className="mod-grp-coupon block clearfix">
 								<div className="grid_12">
 									<h3 className="title-block has-link">
-										Featured Coupons
+										Featured Vouchers
 										<a
 											href="/coupon?id=2"
 											className="link-right"
@@ -190,7 +189,7 @@ const HomePage = () => {
 									className="grid_6 btn btn-orange btn-load-more"
 									href="/coupon"
 								>
-									Load more coupon
+									Load more vouchers
 								</a>
 							</div>
 							{/*end block: Featured Coupons*/}

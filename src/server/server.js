@@ -18,7 +18,7 @@ app.use(
 const takeCoupon = (request, response) => {
 	const couponsData = request.body;
 	fs.writeFile(
-		"../components/coupons.json",
+		"../components/vouchers.json",
 		JSON.stringify(couponsData),
 		function (err) {
 			if (err) {
@@ -34,7 +34,7 @@ const takeCoupon = (request, response) => {
 const dismissCoupon = (request, response) => {
 	const couponsData = request.body;
 	fs.writeFile(
-		"../components/coupons.json",
+		"../components/vouchers.json",
 		JSON.stringify(couponsData),
 		function (err) {
 			if (err) {
@@ -65,9 +65,45 @@ const handleRegister = (request, response) => {
 	});
 };
 
+const handleLogin = (request, response) => {
+	const accounts = request.body;
+
+	fs.writeFile(
+		"../components/accounts.json",
+		JSON.stringify(accounts),
+		function (err) {
+			if (err) {
+				console.log(err);
+			}
+		}
+	);
+	response.status(200).json({
+		msg: "Account create successfully",
+	});
+};
+
+const handleLogout = (request, response) => {
+	const accountsData = request.body;
+
+	fs.writeFile(
+		"../components/accounts.json",
+		JSON.stringify(accountsData),
+		function (err) {
+			if (err) {
+				console.log(err);
+			}
+		}
+	);
+	response.status(200).json({
+		msg: "Account create successfully",
+	});
+};
+
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}.`);
 });
 app.post("/api/update", takeCoupon);
 app.post("/api/delete", dismissCoupon);
 app.post("/api/user/create", handleRegister);
+app.post("/api/user/login", handleLogin);
+app.post("/api/user/logout", handleLogout);

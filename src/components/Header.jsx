@@ -1,14 +1,27 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import couponsData from "../components/coupons.json";
+import vouchersData from "../components/vouchers.json";
 import accountsData from "../components/accounts.json";
+import axios from "axios";
 const Header = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const url = location.pathname;
-	const handleLogout = () => {
+	const handleLogout = async () => {
 		accountsData.isLoggedIn = false;
-		window.location.reload();
+
+		try {
+			const response = await axios.post(
+				"http://localhost:4000/api/user/logout",
+				accountsData
+			);
+			if (response.status === 200) {
+				console.log("Logout successfully");
+				navigate("/");
+			}
+		} catch (err) {
+			console.error(err);
+		}
 	};
 	return (
 		<header className="mod-header" style={{ height: "72px" }}>
@@ -24,8 +37,7 @@ const Header = () => {
 								height: "100%",
 								display: "flex",
 								alignItems: "center",
-								justifyContent: "space-around",
-								flexDirection: "row",
+								justifyContent: "space-between",
 							}}
 						>
 							<h1 id="logo" className="rs">
@@ -37,10 +49,20 @@ const Header = () => {
 								</a>
 							</h1>
 
-							<nav className="main-nav">
+							<nav
+								className="main-nav"
+								style={{
+									height: "100%",
+								}}
+							>
 								<ul
 									id="main-menu"
 									className="nav nav-horizontal clearfix"
+									style={{
+										height: "100%",
+										display: "flex",
+										alignItems: "center",
+									}}
 								>
 									<li className={url === "/" && "active"}>
 										<a href="/">Home</a>
@@ -50,45 +72,9 @@ const Header = () => {
 											url === "/coupon" && "active"
 										}
 									>
-										<a href="/coupon">Coupons</a>
+										<a href="/coupon">Vouchers</a>
 									</li>
-									<li
-										className={`has-sub ${
-											url === "/coupon-code" && "active"
-										}`}
-									>
-										<a href="/coupon-code">Coupons Code</a>
-										<ul className="sub-menu">
-											<li>
-												<a href="/coupon-code">
-													Coupons Code 1
-												</a>
-											</li>
-											<li>
-												<a href="/coupon-code-2">
-													Coupons Code 2
-												</a>
-											</li>
-										</ul>
-									</li>
-									<li
-										className={`has-sub ${
-											url === "/brand" && "active"
-										}`}
-									>
-										<a href="/brand">Brands</a>
-										<ul className="sub-menu">
-											{[1, 2, 3, 4, 5].map((num) => (
-												<li key={num}>
-													<a
-														href={`/brand-detail?id=${num}`}
-													>
-														Brand Detail {num}
-													</a>
-												</li>
-											))}
-										</ul>
-									</li>
+
 									<li className={url === "/blog" && "active"}>
 										<a href="/blog">Blog</a>
 									</li>
@@ -102,12 +88,12 @@ const Header = () => {
 										}}
 									>
 										<a href="/my-coupon?page=1">
-											My coupons
+											My vouchers
 										</a>
 										<i className="icon iPickRed lbl-count">
 											<span>
 												{
-													couponsData["my-coupon"]
+													vouchersData["my-coupon"]
 														.length
 												}
 											</span>
@@ -117,7 +103,7 @@ const Header = () => {
 							</nav>
 							{accountsData.isLoggedIn ? (
 								<div
-									className="btn-login type-login"
+									className="btn-login"
 									style={{
 										display: "flex",
 										flexDirection: "column",
@@ -125,8 +111,8 @@ const Header = () => {
 								>
 									Welcome {accountsData.username}
 									<button
-										className="btn btn-red"
 										onClick={() => handleLogout()}
+										className="btn btn-red btn-login type-login"
 									>
 										Logout
 									</button>

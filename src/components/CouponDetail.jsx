@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "./Layout";
-import couponsData from "../components/coupons.json";
+import couponsData from "../components/vouchers.json";
 
 const CouponDetail = () => {
 	const url = new URLSearchParams(window.location.search);

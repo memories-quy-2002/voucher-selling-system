@@ -1,8 +1,18 @@
 import React from "react";
 
 const CouponItem = ({ coupon, onTakeCoupon, onDismissCoupon }) => {
-	const { id, image, price, brand, desc, days, hours, isTaken, isSale } =
-		coupon;
+	const {
+		id,
+		name,
+		description,
+		amount,
+		unit,
+		price,
+		brand,
+		tags,
+		image,
+		isTaken,
+	} = coupon;
 	return (
 		<div className="coupon-item grid_3">
 			<div className="coupon-content">
@@ -20,28 +30,33 @@ const CouponItem = ({ coupon, onTakeCoupon, onDismissCoupon }) => {
 						</a>
 					</div>
 				</div>
-				<div className="coupon-price">{price}</div>
+				<div className="coupon-price">{amount}% Off</div>
+				<div className="coupon-brand">{name}</div>
 				<div className="coupon-brand">{brand}</div>
-				<div className="coupon-desc">{desc} </div>
-				<div className="time-left">
-					{days} days {hours} hours left
+				<div className="coupon-price">{price} VND</div>
+
+				<div
+					className="coupon-desc"
+					style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+				>
+					{description}{" "}
 				</div>
+				<div className="time-left">9 days 4 hours left</div>
 				{isTaken ? (
 					<button
-						class="btn btn-blue btn-take-coupon untake"
+						class="btn btn-blue btn-take-coupon untake btn-red"
 						onClick={onDismissCoupon}
 					>
-						Un Take Coupon
+						Discard Voucher
 					</button>
 				) : (
 					<button
 						className="btn btn-blue btn-take-coupon"
 						onClick={onTakeCoupon}
 					>
-						Take Coupon
+						Take Voucher
 					</button>
 				)}
-				{isSale && <i className="stick-lbl hot-sale" />}
 			</div>
 		</div>
 	);

@@ -1,5 +1,5 @@
 import React from "react";
-import couponData from "../components/coupons.json";
+import couponData from "../components/vouchers.json";
 import CouponItem from "./CouponItem";
 import starRate from "../images/star-rate.png?v=0.1121989";
 

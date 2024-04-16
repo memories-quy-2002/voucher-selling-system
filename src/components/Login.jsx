@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -9,14 +10,31 @@ const Login = () => {
 	const [checked, setChecked] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const accounts = require("./accounts.json");
-	const handleSubmit = () => {
-		const rightAccount =
-			accounts.username === username && accounts.password === password;
-
-		const isWebsiteLogged = accounts.isLoggedIn;
-		if (rightAccount && !isWebsiteLogged) {
-			accounts.isLoggedIn = true;
+	useEffect(() => {
+		if (accounts.isLoggedIn) {
 			navigate("/");
+		}
+	});
+	const rightAccount =
+		accounts.username === username && accounts.password === password;
+
+	const isWebsiteLogged = accounts.isLoggedIn;
+	const handleSubmit = async () => {
+		accounts.isLoggedIn = true;
+		console.log(accounts);
+		if (rightAccount && !isWebsiteLogged) {
+			try {
+				const response = await axios.post(
+					"http://localhost:4000/api/user/login",
+					accounts
+				);
+				if (response.status === 200) {
+					console.log("Login successfully");
+					navigate("/");
+				}
+			} catch (err) {
+				console.error(err);
+			}
 		} else {
 			setErrors([
 				"The username or password is incorrect. Please try again",

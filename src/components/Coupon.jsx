@@ -18,7 +18,7 @@ const Coupon = () => {
 	const [message, showMessage] = useState("");
 
 	useEffect(() => {
-		const coupons = require("./coupons.json");
+		const coupons = require("./vouchers.json");
 		setCouponsData(coupons);
 	}, []);
 
@@ -98,7 +98,7 @@ const Coupon = () => {
 						<div className="container_grid clearfix">
 							<div className="grid_12">
 								<h2 className="page-title">
-									456 Coupons are waiting for you!
+									A lot of Vouchers are waiting for you!
 								</h2>
 							</div>
 						</div>
@@ -118,7 +118,7 @@ const Coupon = () => {
 											}`}
 											onClick={() => setIsNewCoupon(true)}
 										>
-											New Coupons
+											New Vouchers
 										</span>
 										<span
 											className={`lbl-tab ${
@@ -128,7 +128,7 @@ const Coupon = () => {
 												setIsNewCoupon(false)
 											}
 										>
-											Featured Coupons
+											Featured Vouchers
 										</span>
 									</span>
 								</h3>
@@ -180,7 +180,7 @@ const Coupon = () => {
 								className="grid_6 btn btn-orange btn-load-more"
 								href="/coupon"
 							>
-								LOAD MORE COUPON
+								LOAD MORE VOUCHERS
 							</a>
 						</div>
 						{/*end block: Featured Coupons*/}

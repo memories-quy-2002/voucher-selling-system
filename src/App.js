@@ -13,6 +13,8 @@ import BrandDetail from "./components/BrandDetail";
 import CouponDetail from "./components/CouponDetail";
 import CouponCodeTwo from "./components/CouponCodeTwo";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 
 function App() {
 	return (
@@ -30,6 +32,8 @@ function App() {
 				<Route path="/my-coupon" element={<MyCoupon />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
+				<Route path="/cart" element={<Cart />} />
+				<Route path="/checkout" element={<Checkout />} />
 			</Routes>
 		</BrowserRouter>
 	);

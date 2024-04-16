@@ -5,7 +5,7 @@ const Aside = () => {
 		<>
 			<div className="grid_4 sidebar">
 				<div className="mod-search block">
-					<h3 className="title-block">Find your coupon code</h3>
+					<h3 className="title-block">Find your voucher code</h3>
 					<div className="block-content">
 						<label
 							className="lbl-wrap"
@@ -113,7 +113,7 @@ const Aside = () => {
 				</div>
 				{/*end: .mod-list-store */}
 				<div className="mod-simple-coupon block">
-					<h3 className="title-block">Latest coupon</h3>
+					<h3 className="title-block">Latest voucher</h3>
 					<div className="block-content">
 						<div className="coupons-code-item simple flex">
 							<div className="brand-logo thumb-left">
