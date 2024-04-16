@@ -1,7 +1,14 @@
 import React from "react";
 import Layout from "./Layout";
+import couponsData from "../components/coupons.json";
 
 const CouponDetail = () => {
+	const url = new URLSearchParams(window.location.search);
+	const id = parseInt(url.get("id"));
+	console.log(id);
+	const allCoupons = couponsData.new.concat(couponsData.featured);
+	const couponDetail = allCoupons.filter((coupon) => coupon.id === id)[0];
+	console.log(couponDetail);
 	return (
 		<Layout>
 			<div className="top-area">
@@ -21,7 +28,9 @@ const CouponDetail = () => {
 							<span>&gt;</span>
 							<a href="/coupon">Coupons</a>
 							<span>&gt;</span>
-							<a href="/coupon-detail">Lindt - Save 10% off</a>
+							<a href="/coupon-detail">
+								{couponDetail.brand} - {couponDetail.price}
+							</a>
 						</div>
 					</div>
 					{/*end: .mod-breadcrumb */}
@@ -33,17 +42,23 @@ const CouponDetail = () => {
 										<span className="ver_hold" />
 
 										<img
-											src={require("../images/ex/03-01.jpg")}
+											src={require(`../images/${couponDetail.image}`)}
 											alt="$COUPON_TITLE"
 										/>
 									</div>
 								</div>
-								<i className="stick-lbl hot-sale" />
+								{couponDetail.isSale && (
+									<i className="stick-lbl hot-sale" />
+								)}
 							</div>
 						</div>
 						<div className="grid_5">
-							<div className="save-price">Save 10% Off</div>
-							<span className="brand-name">Lindt</span>
+							<div className="save-price">
+								{couponDetail.price}
+							</div>
+							<span className="brand-name">
+								{couponDetail.brand}
+							</span>
 							<div className="coupon-desc">
 								Lorem ipsum dolor sit amet, consectetur
 								adipiscing elit. Duis vestibulum interdum ipsum,
@@ -55,7 +70,8 @@ const CouponDetail = () => {
 							</div>
 							<div className="wrap-btn clearfix">
 								<div className="day-left">
-									9 days 4 hours left
+									{couponDetail.days} days{" "}
+									{couponDetail.hours} hours left
 								</div>
 								<button className="btn btn-blue btn-take-coupon">
 									Take Coupon
@@ -127,7 +143,12 @@ const CouponDetail = () => {
 							<div className="brand-info ta-c">
 								<div className="brand-logo">
 									<img
-										src={require("../images/ex/03-03.jpg")}
+										src={require(`../images/ex/${
+											couponDetail.brand ===
+											"Lindt Chocolate"
+												? "03-03"
+												: "04-07"
+										}.jpg`)}
 										alt="$NAME"
 									/>
 								</div>
@@ -135,7 +156,9 @@ const CouponDetail = () => {
 									<span style={{ width: "91%" }} />
 								</span>
 								<div className="rated-number">
-									289.876 Followers
+									{couponDetail.brand === "Walmart"
+										? "523.138 Followers"
+										: "289.876 Followers"}
 								</div>
 								<div className="brand-desc ta-l">
 									Lorem ipsum dolor sit amet, consectetur
@@ -146,7 +169,11 @@ const CouponDetail = () => {
 								</div>
 								<a
 									className="link-brand"
-									href="/brand-detail?id=1"
+									href={`/brand-detail?id=${
+										couponDetail.brand === "Lindt Chocolate"
+											? 1
+											: 2
+									}`}
 								>
 									View Brand
 								</a>
@@ -156,8 +183,8 @@ const CouponDetail = () => {
 				</div>
 				<div className="container_grid">
 					<div className="mod-grp-coupon block clearfix tabbable">
-						<div class="grid_12">
-							<h3 class="title-block">Related coupons</h3>
+						<div className="grid_12">
+							<h3 className="title-block">Related coupons</h3>
 						</div>
 						<div className="block-content list-coupon clearfix">
 							<div className="tab-content">

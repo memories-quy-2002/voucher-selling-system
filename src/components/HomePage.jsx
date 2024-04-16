@@ -1,6 +1,8 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import couponsData from "../components/coupons.json";
+import CouponItem from "./CouponItem";
 import Filter from "./Filter";
 import Layout from "./Layout";
 
@@ -52,7 +54,27 @@ const HomePage = () => {
 									<h3 className="title-block has-link">
 										New Coupons
 										<a
-											href="/coupon"
+											href="/coupon?id=1"
+											className="link-right"
+										>
+											See all <i className="pick-right" />
+										</a>
+									</h3>
+								</div>
+								{couponsData.new.slice(0, 4).map((coupon) => (
+									<CouponItem
+										key={coupon.id}
+										coupon={coupon}
+									/>
+								))}
+							</div>
+							{/*end block: New Coupons*/}
+							<div className="mod-grp-coupon block clearfix">
+								<div className="grid_12">
+									<h3 className="title-block has-link">
+										Featured Coupons
+										<a
+											href="/coupon?id=2"
 											className="link-right"
 										>
 											See all <i className="pick-right" />
@@ -60,487 +82,17 @@ const HomePage = () => {
 									</h3>
 								</div>
 								<div className="block-content list-coupon clearfix">
-									<div className="coupon-item grid_3">
-										<div className="coupon-content">
-											<div className="img-thumb-center">
-												<div className="wrap-img-thumb">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_01.jpg")}
-															alt="$COUPON_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-											<div className="coupon-price">
-												$2.00 Off
-											</div>
-											<div className="coupon-brand">
-												Walmart
-											</div>
-											<div className="coupon-desc">
-												Find Parts for All Major Brands
-												at Sears PartsDirect{" "}
-											</div>
-											<div className="time-left">
-												9 days 4 hours left
-											</div>
-											<a
-												className="btn btn-blue btn-take-coupon"
-												href="/"
-											>
-												Take Coupon
-											</a>
-										</div>
-										<i className="stick-lbl hot-sale" />
-									</div>
-									{/*end: .coupon-item */}
-									<div className="coupon-item grid_3">
-										<div className="coupon-content">
-											<div className="img-thumb-center">
-												<div className="wrap-img-thumb">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_02.jpg")}
-															alt="$COUPON_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-											<div className="coupon-price">
-												Save $1.50 on two
-											</div>
-											<div className="coupon-brand">
-												Lindt Chocolate
-											</div>
-											<div className="coupon-desc">
-												Find Parts for All Major Brands
-												at Sears PartsDirect{" "}
-											</div>
-											<div className="time-left">
-												9 days 4 hours left
-											</div>
-											<a
-												className="btn btn-blue btn-take-coupon"
-												href="/"
-											>
-												Take Coupon
-											</a>
-										</div>
-									</div>
-									{/*end: .coupon-item */}
-									<div className="coupon-item grid_3">
-										<div className="coupon-content">
-											<div className="img-thumb-center">
-												<div className="wrap-img-thumb">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_03.jpg")}
-															alt="$COUPON_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-											<div className="coupon-price">
-												$5.00 Off
-											</div>
-											<div className="coupon-brand">
-												Lindt Chocolate
-											</div>
-											<div className="coupon-desc">
-												Find Parts for All Major Brands
-												at Sears PartsDirect{" "}
-											</div>
-											<div className="time-left">
-												2 days 14 hours left
-											</div>
-											<a
-												className="btn btn-blue btn-take-coupon dismiss"
-												href="/"
-											>
-												Dismiss Coupon
-											</a>
-										</div>
-									</div>
-									{/*end: .coupon-item */}
-									<div className="coupon-item grid_3">
-										<div className="coupon-content">
-											<div className="img-thumb-center">
-												<div className="wrap-img-thumb">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_04.jpg")}
-															alt="$COUPON_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-											<div className="coupon-price">
-												$7.00 Off
-											</div>
-											<div className="coupon-brand">
-												Wallmart
-											</div>
-											<div className="coupon-desc">
-												During the Red Star Spectacular
-												Sale going on now get an extra
-												20% off
-											</div>
-											<div className="time-left">
-												12 days 1 hour left
-											</div>
-											<a
-												className="btn btn-blue btn-take-coupon"
-												href="/"
-											>
-												Take Coupon
-											</a>
-										</div>
-										<i className="stick-lbl hot-sale" />
-									</div>
-									{/*end: .coupon-item */}
-								</div>
-							</div>
-							{/*end block: New Coupons*/}
-							<div className="mod-grp-coupon block clearfix">
-								<div className="grid_12">
-									<h3 className="title-block has-link">
-										Featured Coupons
-										<a href="/" className="link-right">
-											See all <i className="pick-right" />
-										</a>
-									</h3>
-								</div>
-								<div className="block-content list-coupon clearfix">
-									<div className="coupon-item grid_3">
-										<div className="coupon-content">
-											<div className="img-thumb-center">
-												<div className="wrap-img-thumb">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_02.jpg")}
-															alt="$COUPON_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-											<div className="coupon-price">
-												$12.00 Off
-											</div>
-											<div className="coupon-brand">
-												Wallmart
-											</div>
-											<div className="coupon-desc">
-												Find Parts for All Major Brands
-												at Sears PartsDirect{" "}
-											</div>
-											<div className="time-left">
-												9 days 4 hours left
-											</div>
-											<a
-												className="btn btn-blue btn-take-coupon"
-												href="/"
-											>
-												VIEW COUPON CODE
-											</a>
-										</div>
-										<i className="stick-lbl hot-sale" />
-									</div>
-									{/*end: .coupon-item */}
-									<div className="coupon-item grid_3">
-										<div className="coupon-content">
-											<div className="img-thumb-center">
-												<div className="wrap-img-thumb">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_03.jpg")}
-															alt="$COUPON_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-											<div className="coupon-price">
-												$17.50 off
-											</div>
-											<div className="coupon-brand">
-												Lindt Chocolate
-											</div>
-											<div className="coupon-desc">
-												Find Parts for All Major Brands
-												at Sears PartsDirect{" "}
-											</div>
-											<div className="time-left">
-												9 days 4 hours left
-											</div>
-											<a
-												className="btn btn-blue btn-take-coupon dismiss"
-												href="/"
-											>
-												17GH0097
-											</a>
-										</div>
-										<i className="stick-lbl trust-brand-y" />
-									</div>
-									{/*end: .coupon-item */}
-									<div className="coupon-item grid_3">
-										<div className="coupon-content">
-											<div className="img-thumb-center">
-												<div className="wrap-img-thumb">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_01.jpg")}
-															alt="$COUPON_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-											<div className="coupon-price">
-												$3.00 Off
-											</div>
-											<div className="coupon-brand">
-												Lindt Chocolate
-											</div>
-											<div className="coupon-desc">
-												Find Parts for All Major Brands
-												at Sears PartsDirect{" "}
-											</div>
-											<div className="time-left">
-												2 days 14 hours left
-											</div>
-											<a
-												className="btn btn-blue btn-take-coupon"
-												href="/"
-											>
-												Take Coupon
-											</a>
-										</div>
-										<i className="stick-lbl trust-brand-b" />
-									</div>
-									{/*end: .coupon-item */}
-									<div className="coupon-item grid_3">
-										<div className="coupon-content">
-											<div className="img-thumb-center">
-												<div className="wrap-img-thumb">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_04.jpg")}
-															alt="$COUPON_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-											<div className="coupon-price">
-												$7.00 Off
-											</div>
-											<div className="coupon-brand">
-												Wallmart
-											</div>
-											<div className="coupon-desc">
-												During the Red Star Spectacular
-												Sale going on now get an extra
-												20% off
-											</div>
-											<div className="time-left">
-												12 days 1 hour left
-											</div>
-											<a
-												className="btn btn-blue btn-take-coupon"
-												href="/"
-											>
-												Take Coupon
-											</a>
-										</div>
-									</div>
-									{/*end: .coupon-item */}
-									<div className="coupon-item grid_3">
-										<div className="coupon-content">
-											<div className="img-thumb-center">
-												<div className="wrap-img-thumb">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_04.jpg")}
-															alt="$COUPON_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-											<div className="coupon-price">
-												$2.00 Off
-											</div>
-											<div className="coupon-brand">
-												Lindt Chocolate
-											</div>
-											<div className="coupon-desc">
-												Find Parts for All Major Brands
-												at Sears PartsDirect{" "}
-											</div>
-											<div className="time-left">
-												9 days 4 hours left
-											</div>
-											<a
-												className="btn btn-blue btn-take-coupon"
-												href="/"
-											>
-												Take Coupon
-											</a>
-										</div>
-									</div>
-									{/*end: .coupon-item */}
-									<div className="coupon-item grid_3">
-										<div className="coupon-content">
-											<div className="img-thumb-center">
-												<div className="wrap-img-thumb">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_01.jpg")}
-															alt="$COUPON_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-											<div className="coupon-price">
-												$11.50 off
-											</div>
-											<div className="coupon-brand">
-												Lindt Chocolate
-											</div>
-											<div className="coupon-desc">
-												Find Parts for All Major Brands
-												at Sears PartsDirect{" "}
-											</div>
-											<div className="time-left">
-												9 days 4 hours left
-											</div>
-											<a
-												className="btn btn-blue btn-take-coupon"
-												href="/"
-											>
-												Take Coupon
-											</a>
-										</div>
-									</div>
-									{/*end: .coupon-item */}
-									<div className="coupon-item grid_3">
-										<div className="coupon-content">
-											<div className="img-thumb-center">
-												<div className="wrap-img-thumb">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_03.jpg")}
-															alt="$COUPON_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-											<div className="coupon-price">
-												$12.00 Off
-											</div>
-											<div className="coupon-brand">
-												SunMart
-											</div>
-											<div className="coupon-desc">
-												Find Parts for All Major Brands
-												at Sears PartsDirect{" "}
-											</div>
-											<div className="time-left">
-												2 days 14 hours left
-											</div>
-											<a
-												className="btn btn-blue btn-take-coupon dismiss"
-												href="/"
-											>
-												Dismiss Coupon
-											</a>
-										</div>
-									</div>
-									{/*end: .coupon-item */}
-									<div className="coupon-item grid_3">
-										<div className="coupon-content">
-											<div className="img-thumb-center">
-												<div className="wrap-img-thumb">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_02.jpg")}
-															alt="$COUPON_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-											<div className="coupon-price">
-												$4.5 Off
-											</div>
-											<div className="coupon-brand">
-												Wallmart
-											</div>
-											<div className="coupon-desc">
-												During the Red Star Spectacular
-												Sale going on now get an extra
-												20% off
-											</div>
-											<div className="time-left">
-												12 days 1 hour left
-											</div>
-											<a
-												className="btn btn-blue btn-take-coupon"
-												href="/"
-											>
-												Take Coupon
-											</a>
-										</div>
-									</div>
+									{couponsData.featured.map((coupon) => (
+										<CouponItem
+											key={coupon.id}
+											coupon={coupon}
+										/>
+									))}
 									{/*end: .coupon-item */}
 								</div>
 								<a
 									className="grid_6 btn btn-orange btn-load-more"
-									href="/"
+									href="/coupon"
 								>
 									Load more coupon
 								</a>
@@ -580,7 +132,7 @@ const HomePage = () => {
 								<div className="grid_12">
 									<h3 className="title-block has-link">
 										POPULAR BRANDS (129)
-										<a href="/" className="link-right">
+										<a href="/brand" className="link-right">
 											See all <i className="pick-right" />
 										</a>
 									</h3>

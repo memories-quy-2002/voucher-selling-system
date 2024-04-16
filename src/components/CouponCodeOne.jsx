@@ -565,11 +565,6 @@ const CouponCodeOne = () => {
 												type="search"
 												placeholder="Search"
 											/>
-											<input
-												type="submit"
-												className="btn-search"
-												defaultValue
-											/>
 										</label>
 									</div>
 								</div>

@@ -1,0 +1,215 @@
+{
+	"new": [
+		{
+			"id": 1,
+			"image": "ex/01_01.jpg",
+			"price": "$2.00 Off",
+			"brand": "Walmart",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 9,
+			"hours": 4,
+			"isTaken": false,
+			"isSale": true
+		},
+		{
+			"id": 2,
+			"image": "ex/01_02.jpg",
+			"price": "Save $1.50 on two",
+			"brand": "Lindt Chocolate",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 9,
+			"hours": 4,
+			"isTaken": false,
+			"isSale": false
+		},
+		{
+			"id": 3,
+			"image": "ex/01_03.jpg",
+			"price": "$5.00 Off",
+			"brand": "Lindt Chocolate",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 2,
+			"hours": 14,
+			"isTaken": false,
+			"isSale": false
+		},
+		{
+			"id": 4,
+			"image": "ex/01_04.jpg",
+			"price": "$7.00 Off",
+			"brand": "Walmart",
+			"desc": "During the Red Star Spectacular Sale going on now get an extra 20% off",
+			"days": 12,
+			"hours": 1,
+			"isTaken": false,
+			"isSale": true
+		},
+		{
+			"id": 5,
+			"image": "ex/01_02.jpg",
+			"price": "$12.00 Off",
+			"brand": "Walmart",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 9,
+			"hours": 4,
+			"isTaken": false,
+			"isSale": true
+		},
+		{
+			"id": 6,
+			"image": "ex/01_03.jpg",
+			"price": "$17.50 Off",
+			"brand": "Lindt Chocolate",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 9,
+			"hours": 4,
+			"isTaken": false,
+			"isSale": false
+		},
+		{
+			"id": 7,
+			"image": "ex/01_01.jpg",
+			"price": "$3.00 Off",
+			"brand": "Lindt Chocolate",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 2,
+			"hours": 14,
+			"isTaken": false,
+			"isSale": false
+		},
+		{
+			"id": 8,
+			"image": "ex/01_04.jpg",
+			"price": "$7.00 Off",
+			"brand": "Walmart",
+			"desc": "During the Red Star Spectacular Sale going on now get an extra 20% off",
+			"days": 12,
+			"hours": 1,
+			"isTaken": false,
+			"isSale": true
+		},
+		{
+			"id": 9,
+			"image": "ex/01_04.jpg",
+			"price": "$2.00 Off",
+			"brand": "Lindt Chocolate",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 9,
+			"hours": 4,
+			"isTaken": false,
+			"isSale": true
+		},
+		{
+			"id": 10,
+			"image": "ex/01_03.jpg",
+			"price": "$11.50 Off",
+			"brand": "Lindt Chocolate",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 9,
+			"hours": 4,
+			"isTaken": false,
+			"isSale": false
+		},
+		{
+			"id": 11,
+			"image": "ex/01_02.jpg",
+			"price": "$5.00 Off",
+			"brand": "Lindt Chocolate",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 2,
+			"hours": 14,
+			"isTaken": false,
+			"isSale": false
+		},
+		{
+			"image": "ex/01_01.jpg",
+			"price": "$4.5 Off",
+			"brand": "Walmart",
+			"desc": "During the Red Star Spectacular Sale going on now get an extra 20% off",
+			"days": 12,
+			"hours": 1,
+			"isTaken": false,
+			"isSale": true
+		}
+	],
+	"featured": [
+		{
+			"id": 13,
+			"image": "ex/01_01.jpg",
+			"price": "$2.00 Off",
+			"brand": "Walmart",
+			"desc": "During the Red Star Spectacular Sale going on now get an extra 20% off",
+			"days": 9,
+			"hours": 4,
+			"isTaken": false,
+			"isSale": true
+		},
+		{
+			"id": 14,
+			"image": "ex/01_02.jpg",
+			"price": "Save $1.50 on two",
+			"brand": "Lindt Chocolate",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 9,
+			"hours": 4,
+			"isTaken": false,
+			"isSale": true
+		},
+		{
+			"id": 15,
+			"image": "ex/01_03.jpg",
+			"price": "$5.00 Off",
+			"brand": "Lindt Chocolate",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 2,
+			"hours": 14,
+			"isTaken": false,
+			"isSale": true
+		},
+		{
+			"id": 16,
+			"image": "ex/01_04.jpg",
+			"price": "$7.00 Off",
+			"brand": "Walmart",
+			"desc": "During the Red Star Spectacular Sale going on now get an extra 20% off",
+			"days": 12,
+			"hours": 1,
+			"isTaken": false,
+			"isSale": true
+		},
+		{
+			"id": 17,
+			"image": "ex/01_02.jpg",
+			"price": "$12.00 Off",
+			"brand": "Walmart",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 9,
+			"hours": 4,
+			"isTaken": false,
+			"isSale": false
+		},
+		{
+			"id": 18,
+			"image": "ex/01_03.jpg",
+			"price": "$17.50 Off",
+			"brand": "Lindt Chocolate",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 9,
+			"hours": 4,
+			"isTaken": false,
+			"isSale": false
+		},
+		{
+			"id": 19,
+			"image": "ex/01_01.jpg",
+			"price": "$3.00 Off",
+			"brand": "Lindt Chocolate",
+			"desc": "Find Parts for All Major Brands at Sears PartsDirect",
+			"days": 2,
+			"hours": 14,
+			"isTaken": false,
+			"isSale": false
+		}
+	],
+	"my-coupon": []
+}
