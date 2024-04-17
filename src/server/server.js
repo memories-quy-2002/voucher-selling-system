@@ -27,7 +27,7 @@ const takeCoupon = (request, response) => {
 		}
 	);
 	response.status(200).json({
-		msg: "Coupon taken successfully",
+		msg: "Voucher has been taken successfully",
 	});
 };
 
@@ -43,7 +43,7 @@ const dismissCoupon = (request, response) => {
 		}
 	);
 	response.status(200).json({
-		msg: "Coupon dismissed successfully",
+		msg: "Voucher has been discarded successfully",
 	});
 };
 

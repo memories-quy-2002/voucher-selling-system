@@ -1,13 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "./Layout";
-import couponsData from "../components/coupons.json";
 import CouponItem from "./CouponItem";
+import axios from "axios";
 
 const CouponDetail = () => {
 	const url = new URLSearchParams(window.location.search);
 	const id = parseInt(url.get("id"));
+	const [couponsData, setCouponsData] = useState(require("./vouchers.json"));
 	const allCoupons = couponsData.new.concat(couponsData.featured);
 	const couponDetail = allCoupons.filter((coupon) => coupon.id === id)[0];
+
+	const onTakeCoupon = async (couponId) => {
+		const updatedCoupons = { ...couponsData }; // Create a copy
+
+		if (couponDetail) {
+			try {
+				couponDetail.isTaken = true;
+				updatedCoupons["my-coupon"].push(couponDetail);
+				setCouponsData(updatedCoupons);
+				console.log(couponsData);
+				const response = await axios.post(
+					"http://localhost:4000/api/update",
+					couponsData
+				);
+				if (response.status === 200) {
+					console.log(response.data.msg);
+				}
+			} catch (err) {
+				console.error(err);
+			}
+		} else {
+			alert("Coupon with ID " + couponId + " not found.");
+		}
+	};
+	const onDismissCoupon = async (couponId) => {
+		const updatedCoupons = { ...couponsData }; // Create a copy
+
+		if (couponDetail) {
+			try {
+				couponDetail.isTaken = false;
+				// const newCoupons = updatedCoupons["my-coupon"].filter(
+				// 	(item) => item.id !== couponDetail.id
+				// );
+				const index = updatedCoupons["my-coupon"].indexOf(couponDetail);
+				const newCoupons = updatedCoupons["my-coupon"].splice(index, 1);
+				console.log("New coupons: ", newCoupons);
+				setCouponsData((previousCoupons) => ({
+					...previousCoupons,
+					"my-coupon": newCoupons,
+				}));
+				console.log(couponsData);
+				const response = await axios.post(
+					"http://localhost:4000/api/delete",
+					couponsData
+				);
+				if (response.status === 200) {
+					console.log(response.data.msg);
+				}
+			} catch (err) {
+				console.error(err);
+			}
+		} else {
+			alert("Coupon with ID " + couponId + " not found.");
+		}
+	};
 	return (
 		<Layout>
 			<div className="top-area">
@@ -65,9 +121,19 @@ const CouponDetail = () => {
 								<div className="day-left">
 									9 days 4 hours left
 								</div>
-								<button className="btn btn-blue btn-take-coupon">
-									Take Coupon
-								</button>
+								{couponDetail.isTaken ? (
+									<button
+										class="btn btn-blue btn-take-coupon untake btn-red"
+										onClick={onDismissCoupon}>
+										Discard Voucher
+									</button>
+								) : (
+									<button
+										className="btn btn-blue btn-take-coupon"
+										onClick={onTakeCoupon}>
+										Take Voucher
+									</button>
+								)}
 							</div>
 							<div className="wrap-action clearfix">
 								<div className="left-vote">
@@ -83,26 +149,22 @@ const CouponDetail = () => {
 									Share now
 									<a
 										href="https://www.facebook.com"
-										target="blank"
-									>
+										target="blank">
 										<i className="fa fa-facebook-square fa-2x" />
 									</a>
 									<a
 										href="https://www.twitter.com"
-										target="blank"
-									>
+										target="blank">
 										<i className="fa fa-twitter-square fa-2x" />
 									</a>
 									<a
 										href="https://www.pinterest.com"
-										target="blank"
-									>
+										target="blank">
 										<i className="fa fa-pinterest-square fa-2x" />
 									</a>
 									<a
 										href="https://www.linkedin.com"
-										target="blank"
-									>
+										target="blank">
 										<i className="fa fa-linkedin-square fa-2x" />
 									</a>
 								</div>
@@ -111,62 +173,37 @@ const CouponDetail = () => {
 								<span className="btn btn-gray type-tag tag-lbl">
 									Tag
 								</span>
-								<span className="btn btn-gray type-tag">
-									Sweet
-								</span>
-								<span className="btn btn-gray type-tag">
-									Lindor
-								</span>
-								<span className="btn btn-gray type-tag">
-									Food
-								</span>
-								<span className="btn btn-gray type-tag">
-									Lindt
-								</span>
-								<span className="btn btn-gray type-tag">
-									Walmart
-								</span>
-								<span className="btn btn-gray type-tag">
-									Chocolate
-								</span>
+								{couponDetail.tags.split(", ").map((tag) => (
+									<span className="btn btn-gray type-tag">
+										{tag}
+									</span>
+								))}
 							</div>
 						</div>
 						<div className="grid_3">
 							<div className="brand-info ta-c">
-								<div className="brand-logo">
-									<img
-										src={require(`../images/ex/${
-											couponDetail.brand ===
-											"Lindt Chocolate"
-												? "03-03"
-												: "04-07"
-										}.jpg`)}
-										alt="$NAME"
+								<span
+									className="star-rate"
+									style={{ padding: 0 }}>
+									<span
+										style={{
+											width: `${
+												Math.random() * 50 + 50
+											}%`,
+										}}
 									/>
-								</div>
-								<span className="star-rate"></span>
+								</span>
 								<div className="rated-number">
-									{couponDetail.brand === "Walmart"
-										? "523.138 Followers"
-										: "289.876 Followers"}
+									{Math.floor(Math.random() * 1000000)}{" "}
+									followers
 								</div>
 								<div className="brand-desc ta-l">
 									Lorem ipsum dolor sit amet, consectetur
 									adipiscing elit. Duis vestibulum interdum
 									ipsum, eu gravida massa cursus id.
 									Pellentesque feugiat ante eu scelerisque
-									porta. In quis velit ligula.{" "}
+									porta. In quis velit ligula.
 								</div>
-								<a
-									className="link-brand"
-									href={`/brand-detail?id=${
-										couponDetail.brand === "Lindt Chocolate"
-											? 1
-											: 2
-									}`}
-								>
-									View Brand
-								</a>
 							</div>
 						</div>
 					</div>
@@ -183,6 +220,7 @@ const CouponDetail = () => {
 										<CouponItem
 											key={coupon.id}
 											coupon={coupon}
+											hasButton={false}
 										/>
 									))}
 									{/*end: .coupon-item */}
@@ -211,8 +249,7 @@ const CouponDetail = () => {
 								</div>
 								<button
 									className="btn btn-orange btn-submit-email"
-									type="submit"
-								>
+									type="submit">
 									SUBSCRIBE NOW
 								</button>
 							</div>
@@ -236,8 +273,7 @@ const CouponDetail = () => {
 											<span className="ver_hold" />
 											<a
 												href="/coupon-detail"
-												className="ver_container"
-											>
+												className="ver_container">
 												<img
 													src={require("../images/ex/01_07.jpg")}
 													alt="$BRAND_TITLE"
@@ -255,8 +291,7 @@ const CouponDetail = () => {
 											<span className="ver_hold" />
 											<a
 												href="/coupon-detail"
-												className="ver_container"
-											>
+												className="ver_container">
 												<img
 													src={require("../images/ex/01_07.jpg")}
 													alt="$BRAND_TITLE"
@@ -274,8 +309,7 @@ const CouponDetail = () => {
 											<span className="ver_hold" />
 											<a
 												href="/coupon-detail"
-												className="ver_container"
-											>
+												className="ver_container">
 												<img
 													src={require("../images/ex/01_07.jpg")}
 													alt="$BRAND_TITLE"
@@ -293,8 +327,7 @@ const CouponDetail = () => {
 											<span className="ver_hold" />
 											<a
 												href="/coupon-detail"
-												className="ver_container"
-											>
+												className="ver_container">
 												<img
 													src={require("../images/ex/01_07.jpg")}
 													alt="$BRAND_TITLE"
@@ -312,8 +345,7 @@ const CouponDetail = () => {
 											<span className="ver_hold" />
 											<a
 												href="/coupon-detail"
-												className="ver_container"
-											>
+												className="ver_container">
 												<img
 													src={require("../images/ex/01_07.jpg")}
 													alt="$BRAND_TITLE"
@@ -331,8 +363,7 @@ const CouponDetail = () => {
 											<span className="ver_hold" />
 											<a
 												href="/coupon-detail"
-												className="ver_container"
-											>
+												className="ver_container">
 												<img
 													src={require("../images/ex/01_07.jpg")}
 													alt="$BRAND_TITLE"

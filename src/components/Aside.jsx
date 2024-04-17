@@ -9,19 +9,14 @@ const Aside = () => {
 					<div className="block-content">
 						<label
 							className="lbl-wrap"
-							htmlFor="sys_search_coupon_code"
-						>
+							htmlFor="sys_search_coupon_code">
 							<input
 								className="keyword-search"
 								id="sys_search_coupon_code"
 								type="search"
 								placeholder="Search"
 							/>
-							<input
-								type="submit"
-								className="btn-search"
-								defaultValue
-							/>
+							<input type="button" className="btn-search"></input>
 						</label>
 					</div>
 				</div>

@@ -1,6 +1,11 @@
 import React from "react";
 
-const CouponItem = ({ coupon, onTakeCoupon, onDismissCoupon }) => {
+const CouponItem = ({
+	coupon,
+	onTakeCoupon,
+	onDismissCoupon,
+	hasButton = true,
+}) => {
 	const {
 		id,
 		name,
@@ -21,8 +26,7 @@ const CouponItem = ({ coupon, onTakeCoupon, onDismissCoupon }) => {
 						<span className="ver_hold" />
 						<a
 							href={`/coupon-detail?id=${id}`}
-							className="ver_container"
-						>
+							className="ver_container">
 							<img
 								src={require(`../images/${image}`)}
 								alt="$COUPON_TITLE"
@@ -37,26 +41,24 @@ const CouponItem = ({ coupon, onTakeCoupon, onDismissCoupon }) => {
 
 				<div
 					className="coupon-desc"
-					style={{ overflow: "hidden", textOverflow: "ellipsis" }}
-				>
+					style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
 					{description}{" "}
 				</div>
 				<div className="time-left">9 days 4 hours left</div>
-				{isTaken ? (
-					<button
-						class="btn btn-blue btn-take-coupon untake btn-red"
-						onClick={onDismissCoupon}
-					>
-						Discard Voucher
-					</button>
-				) : (
-					<button
-						className="btn btn-blue btn-take-coupon"
-						onClick={onTakeCoupon}
-					>
-						Take Voucher
-					</button>
-				)}
+				{hasButton &&
+					(isTaken ? (
+						<button
+							class="btn btn-blue btn-take-coupon untake btn-red"
+							onClick={onDismissCoupon}>
+							Discard Voucher
+						</button>
+					) : (
+						<button
+							className="btn btn-blue btn-take-coupon"
+							onClick={onTakeCoupon}>
+							Take Voucher
+						</button>
+					))}
 			</div>
 		</div>
 	);

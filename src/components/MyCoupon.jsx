@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Layout from "./Layout";
 import CouponItem from "./CouponItem";
+import Layout from "./Layout";
 
 const MyCoupon = () => {
 	const [couponsData, setCouponsData] = useState({
@@ -10,20 +9,11 @@ const MyCoupon = () => {
 		featured: [],
 		"my-coupon": [],
 	});
-	const [totalPrice, setTotalPrice] = useState(0);
 	useEffect(() => {
 		const coupons = require("./vouchers.json");
 		setCouponsData(coupons);
 	}, []);
 	console.log(couponsData);
-	useEffect(() => {
-		const coupons = require("./vouchers.json");
-		const allPrice = coupons["my-coupon"].reduce(
-			(sum, item) => sum + item.price,
-			0
-		);
-		setTotalPrice(allPrice);
-	}, []);
 
 	const onDismissCoupon = async (couponId) => {
 		const updatedCoupons = { ...couponsData }; // Create a copy
@@ -105,8 +95,7 @@ const MyCoupon = () => {
 							<a
 								className="grid_12 btn btn-orange btn-load-more"
 								style={{}}
-								href="/cart"
-							>
+								href="/cart">
 								GO TO CART
 							</a>
 						</div>

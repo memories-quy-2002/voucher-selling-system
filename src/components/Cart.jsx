@@ -41,17 +41,15 @@ const Cart = () => {
 							<div className="block-content list-coupon clearfix">
 								<div
 									className="tab-content"
-									style={{ display: "flex", gap: "2rem" }}
-								>
+									style={{ display: "flex", gap: "2rem" }}>
 									<div
 										className="tab-content-item clearfix active"
 										style={{
 											display: "flex",
 											flexDirection: "column",
 											gap: "1rem",
-											flex: 5,
-										}}
-									>
+											flex: 6,
+										}}>
 										{couponsData["my-coupon"].map(
 											(coupon) => (
 												<div
@@ -64,8 +62,7 @@ const Cart = () => {
 														gap: "1rem",
 														boxShadow:
 															"00 5px 3px rgba(0, 0, 0, 0.2)",
-													}}
-												>
+													}}>
 													<div>
 														<div>
 															<span className="ver_hold" />
@@ -107,14 +104,15 @@ const Cart = () => {
 											flex: 2,
 											height: "50%",
 											border: "1px solid black",
-										}}
-									>
+										}}>
 										<div
 											style={{
 												fontSize: "1rem",
 												padding: "1rem",
-											}}
-										>
+												display: "flex",
+												flexDirection: "column",
+												justifyContent: "center",
+											}}>
 											<p style={{ color: "black" }}>
 												Total Price: {totalPrice} VND
 											</p>
@@ -124,12 +122,15 @@ const Cart = () => {
 											<p style={{ color: "black" }}>
 												Subtotal: {totalPrice} VND
 											</p>
+											<hr />
+											<h5 style={{ textAlign: "center" }}>
+												Checkout method
+											</h5>
 											<button
 												className="btn btn-blue"
 												onClick={() =>
 													navigate("/checkout")
-												}
-											>
+												}>
 												CHeckout
 											</button>
 										</div>
