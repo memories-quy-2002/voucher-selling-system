@@ -232,120 +232,30 @@ const HomePage = () => {
 										</a>
 									</h3>
 								</div>
+
 								<div className="block-content list-brand clearfix">
-									<div className="brand-item grid_4">
-										<div className="brand-content">
-											<div className="brand-logo">
-												<div className="wrap-img-logo">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_07.jpg")}
-															alt="$BRAND_TITLE"
-														/>
-													</a>
+									{
+										["08", "09", "10", "11", "12", "13"].map((brand) =>
+											<div className="brand-item grid_4">
+												<div className="brand-content">
+													<div className="brand-logo">
+														<div className="wrap-img-logo">
+															<span className="ver_hold" />
+															<a
+																href="/"
+																className="ver_container"
+															>
+																<img
+																	src={require(`../images/ex/01_${brand}.jpg`)}
+																	alt="$BRAND_TITLE"
+																/>
+															</a>
+														</div>
+													</div>
 												</div>
 											</div>
-										</div>
-									</div>
-									{/*end: .brand-item */}
-									<div className="brand-item grid_4">
-										<div className="brand-content">
-											<div className="brand-logo">
-												<div className="wrap-img-logo">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_07.jpg")}
-															alt="$BRAND_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									{/*end: .brand-item */}
-									<div className="brand-item grid_4">
-										<div className="brand-content">
-											<div className="brand-logo">
-												<div className="wrap-img-logo">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_07.jpg")}
-															alt="$BRAND_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									{/*end: .brand-item */}
-									<div className="brand-item grid_4">
-										<div className="brand-content">
-											<div className="brand-logo">
-												<div className="wrap-img-logo">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_07.jpg")}
-															alt="$BRAND_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									{/*end: .brand-item */}
-									<div className="brand-item grid_4">
-										<div className="brand-content">
-											<div className="brand-logo">
-												<div className="wrap-img-logo">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_07.jpg")}
-															alt="$BRAND_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									{/*end: .brand-item */}
-									<div className="brand-item grid_4">
-										<div className="brand-content">
-											<div className="brand-logo">
-												<div className="wrap-img-logo">
-													<span className="ver_hold" />
-													<a
-														href="/"
-														className="ver_container"
-													>
-														<img
-															src={require("../images/ex/01_07.jpg")}
-															alt="$BRAND_TITLE"
-														/>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
+										)
+									}
 									<ToastContainer
 										className="p-3"
 										position={"bottom-end"}

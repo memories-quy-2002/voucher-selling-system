@@ -1,13 +1,17 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Toast, ToastContainer } from "react-bootstrap";
+import CouponItem from "./CouponItem";
 import Filter from "./Filter";
 import Layout from "./Layout";
-import CouponItem from "./CouponItem";
-import axios from "axios";
-import { Toast, ToastContainer } from "react-bootstrap";
 
 const Coupon = () => {
 	const url = new URLSearchParams(window.location.search);
 	const id = parseInt(url.get("id"));
+	const name = url.get("searchTerm") ? url.get("searchTerm") : undefined;
+	const parts = url.get("days") ? url.get("days").split("-") : undefined;
+	const daysLeft = [parseInt(parts[0], 10), parseInt(parts[1], 10)];
+
 	const [isNewCoupon, setIsNewCoupon] = useState(id === 2 ? false : true);
 	const [couponsData, setCouponsData] = useState({
 		new: [],
@@ -40,7 +44,6 @@ const Coupon = () => {
 				if (response.status === 200) {
 					showMessage(response.data.msg);
 					setShowToast(true); // Show the toast immediately
-
 					setTimeout(() => {
 						setShowToast(false);
 					}, 5000); // 5 seconds in milliseconds
@@ -52,7 +55,9 @@ const Coupon = () => {
 			alert("Coupon with ID " + couponId + " not found.");
 		}
 	};
+
 	const onDismissCoupon = async (couponId) => {
+		console.log(couponId);
 		const updatedCoupons = { ...couponsData }; // Create a copy
 		const foundCoupon =
 			updatedCoupons.new.find((coupon) => coupon.id === couponId) ||
@@ -60,9 +65,6 @@ const Coupon = () => {
 		if (foundCoupon) {
 			try {
 				foundCoupon.isTaken = false;
-				// const newCoupons = updatedCoupons["my-coupon"].filter(
-				// 	(item) => item.id !== foundCoupon.id
-				// );
 				const index = updatedCoupons["my-coupon"].indexOf(foundCoupon);
 				const newCoupons = updatedCoupons["my-coupon"].splice(index, 1);
 				console.log("New coupons: ", newCoupons);
@@ -78,7 +80,6 @@ const Coupon = () => {
 				if (response.status === 200) {
 					showMessage(response.data.msg);
 					setShowToast(true); // Show the toast immediately
-
 					setTimeout(() => {
 						setShowToast(false);
 					}, 5000); // 5 seconds in milliseconds
@@ -90,6 +91,7 @@ const Coupon = () => {
 			alert("Coupon with ID " + couponId + " not found.");
 		}
 	};
+
 	return (
 		<Layout>
 			<div>
@@ -113,20 +115,14 @@ const Coupon = () => {
 								<h3 className="title-block">
 									<span className="wrap-tab">
 										<span
-											className={`lbl-tab ${
-												isNewCoupon && "active"
-											}`}
+											className={`lbl-tab ${isNewCoupon && "active"}`}
 											onClick={() => setIsNewCoupon(true)}
 										>
 											New Vouchers
 										</span>
 										<span
-											className={`lbl-tab ${
-												!isNewCoupon && "active"
-											}`}
-											onClick={() =>
-												setIsNewCoupon(false)
-											}
+											className={`lbl-tab ${!isNewCoupon && "active"}`}
+											onClick={() => setIsNewCoupon(false)}
 										>
 											Featured Vouchers
 										</span>
@@ -137,49 +133,47 @@ const Coupon = () => {
 							<div className="block-content list-coupon clearfix">
 								<div className="tab-content">
 									<div
-										className={`tab-content-item ${
-											isNewCoupon && "active"
-										}`}
+										className={`tab-content-item ${isNewCoupon && "active"}`}
 									>
-										{couponsData.new.map((coupon) => (
-											<CouponItem
-												key={coupon.id}
-												coupon={coupon}
-												onTakeCoupon={() =>
-													onTakeCoupon(coupon.id)
-												}
-												onDismissCoupon={
-													onDismissCoupon
-												}
-											/>
-										))}
+										{couponsData.new
+											.filter(
+												(coupon) =>
+													coupon.days >= daysLeft[0] &&
+													coupon.days <= daysLeft[1]
+											)
+											.filter((coupon) => {
+												if (name)
+													return coupon.name
+														.toLowerCase()
+														.includes(name.toLowerCase());
+												else return true;
+											})
+											.map((coupon) => (
+												<CouponItem
+													key={coupon.id}
+													coupon={coupon}
+													onTakeCoupon={() => onTakeCoupon(coupon.id)}
+													onDismissCoupon={() => onDismissCoupon(coupon.id)}
+												/>
+											))}
 										{/*end: .coupon-item */}
 									</div>
 									<div
-										className={`tab-content-item ${
-											!isNewCoupon && "active"
-										}`}
+										className={`tab-content-item ${!isNewCoupon && "active"}`}
 									>
 										{couponsData.featured.map((coupon) => (
 											<CouponItem
 												key={coupon.id}
 												coupon={coupon}
-												onTakeCoupon={() =>
-													onTakeCoupon(coupon.id)
-												}
-												onDismissCoupon={
-													onDismissCoupon
-												}
+												onTakeCoupon={() => onTakeCoupon(coupon.id)}
+												onDismissCoupon={() => onDismissCoupon(coupon.id)}
 											/>
 										))}
 										{/*end: .coupon-item */}
 									</div>
 								</div>
 							</div>
-							<a
-								className="grid_6 btn btn-orange btn-load-more"
-								href="/coupon"
-							>
+							<a className="grid_6 btn btn-orange btn-load-more" href="/coupon">
 								LOAD MORE VOUCHERS
 							</a>
 						</div>
@@ -188,12 +182,8 @@ const Coupon = () => {
 							<div className="grid_12">
 								<div className="wrap-form clearfix">
 									<div className="left-lbl">
-										<div className="big-lbl">
-											newsletter
-										</div>
-										<div className="sml-lbl">
-											Don't miss a chance!
-										</div>
+										<div className="big-lbl">newsletter</div>
+										<div className="sml-lbl">Don't miss a chance!</div>
 									</div>
 									<div className="wrap-email">
 										<label htmlFor="sys_email_newsletter">
@@ -224,119 +214,23 @@ const Coupon = () => {
 								</h3>
 							</div>
 							<div className="block-content list-brand clearfix">
-								<div className="brand-item grid_4">
-									<div className="brand-content">
-										<div className="brand-logo">
-											<div className="wrap-img-logo">
-												<span className="ver_hold" />
-												<a
-													href="/coupon-detail"
-													className="ver_container"
-												>
-													<img
-														src={require("../images/ex/01_07.jpg")}
-														alt="$BRAND_TITLE"
-													/>
-												</a>
+								{["08", "09", "10", "11", "12", "13"].map((brand) => (
+									<div key={brand} className="brand-item grid_4">
+										<div className="brand-content">
+											<div className="brand-logo">
+												<div className="wrap-img-logo">
+													<span className="ver_hold" />
+													<a href="/" className="ver_container">
+														<img
+															src={require(`../images/ex/01_${brand}.jpg`)}
+															alt="$BRAND_TITLE"
+														/>
+													</a>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								{/*end: .brand-item */}
-								<div className="brand-item grid_4">
-									<div className="brand-content">
-										<div className="brand-logo">
-											<div className="wrap-img-logo">
-												<span className="ver_hold" />
-												<a
-													href="/coupon-detail"
-													className="ver_container"
-												>
-													<img
-														src={require("../images/ex/01_07.jpg")}
-														alt="$BRAND_TITLE"
-													/>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								{/*end: .brand-item */}
-								<div className="brand-item grid_4">
-									<div className="brand-content">
-										<div className="brand-logo">
-											<div className="wrap-img-logo">
-												<span className="ver_hold" />
-												<a
-													href="/coupon-detail"
-													className="ver_container"
-												>
-													<img
-														src={require("../images/ex/01_07.jpg")}
-														alt="$BRAND_TITLE"
-													/>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								{/*end: .brand-item */}
-								<div className="brand-item grid_4">
-									<div className="brand-content">
-										<div className="brand-logo">
-											<div className="wrap-img-logo">
-												<span className="ver_hold" />
-												<a
-													href="/coupon-detail"
-													className="ver_container"
-												>
-													<img
-														src={require("../images/ex/01_07.jpg")}
-														alt="$BRAND_TITLE"
-													/>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								{/*end: .brand-item */}
-								<div className="brand-item grid_4">
-									<div className="brand-content">
-										<div className="brand-logo">
-											<div className="wrap-img-logo">
-												<span className="ver_hold" />
-												<a
-													href="/coupon-detail"
-													className="ver_container"
-												>
-													<img
-														src={require("../images/ex/01_07.jpg")}
-														alt="$BRAND_TITLE"
-													/>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								{/*end: .brand-item */}
-								<div className="brand-item grid_4">
-									<div className="brand-content">
-										<div className="brand-logo">
-											<div className="wrap-img-logo">
-												<span className="ver_hold" />
-												<a
-													href="/coupon-detail"
-													className="ver_container"
-												>
-													<img
-														src={require("../images/ex/01_07.jpg")}
-														alt="$BRAND_TITLE"
-													/>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
+								))}
 								<ToastContainer
 									className="p-3"
 									position={"bottom-end"}
@@ -355,9 +249,7 @@ const Coupon = () => {
 										animation
 									>
 										<Toast.Header closeButton={true}>
-											<strong className="me-auto">
-												Notifications
-											</strong>
+											<strong className="me-auto">Notifications</strong>
 										</Toast.Header>
 										<Toast.Body>{message}</Toast.Body>
 									</Toast>

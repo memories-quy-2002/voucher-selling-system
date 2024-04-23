@@ -13,6 +13,7 @@ const CouponItem = ({
 		amount,
 		unit,
 		price,
+		days,
 		brand,
 		tags,
 		image,
@@ -44,11 +45,11 @@ const CouponItem = ({
 					style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
 					{description}{" "}
 				</div>
-				<div className="time-left">9 days 4 hours left</div>
+				<div className="time-left">{days} days left</div>
 				{hasButton &&
 					(isTaken ? (
 						<button
-							class="btn btn-blue btn-take-coupon untake btn-red"
+							className="btn btn-blue btn-take-coupon untake btn-red"
 							onClick={onDismissCoupon}>
 							Discard Voucher
 						</button>

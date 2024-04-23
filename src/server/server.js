@@ -67,7 +67,7 @@ const handleRegister = (request, response) => {
 
 const handleLogin = (request, response) => {
 	const accounts = request.body;
-
+	console.log(accounts);
 	fs.writeFile(
 		"../components/accounts.json",
 		JSON.stringify(accounts),

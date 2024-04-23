@@ -17,13 +17,11 @@ const Login = () => {
 	});
 	const rightAccount =
 		accounts.username === username && accounts.password === password;
-
-	const isWebsiteLogged = accounts.isLoggedIn;
-	const handleSubmit = async () => {
-		accounts.isLoggedIn = true;
-		console.log(accounts);
-		if (rightAccount && !isWebsiteLogged) {
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		if (rightAccount) {
 			try {
+				accounts.isLoggedIn = true;
 				const response = await axios.post(
 					"http://localhost:4000/api/user/login",
 					accounts
@@ -111,12 +109,12 @@ const Login = () => {
 										<button
 											className="btn-flat gr btn-submit-reg"
 											type="submit"
-											onClick={() => handleSubmit()}
+											onClick={(e) => handleSubmit(e)}
 										>
 											Login
 										</button>
-										{errors.map((error) => (
-											<div style={{ color: "red" }}>
+										{errors.map((error, index) => (
+											<div key={index} style={{ color: "red" }}>
 												{error}
 											</div>
 										))}

@@ -9,7 +9,6 @@ const Header = () => {
 	const url = location.pathname;
 	const handleLogout = async () => {
 		accountsData.isLoggedIn = false;
-
 		try {
 			const response = await axios.post(
 				"http://localhost:4000/api/user/logout",
@@ -26,10 +25,7 @@ const Header = () => {
 	return (
 		<header className="mod-header" style={{ height: "72px" }}>
 			<div className="grid_frame" style={{ height: "100%" }}>
-				<div
-					className="container_grid clearfix"
-					style={{ height: "100%" }}
-				>
+				<div className="container_grid clearfix" style={{ height: "100%" }}>
 					<div className="grid_12" style={{ height: "100%" }}>
 						<div
 							className="header-content clearfix"
@@ -42,10 +38,7 @@ const Header = () => {
 						>
 							<h1 id="logo" className="rs">
 								<a href="/">
-									<img
-										src={require("../images/logo.png")}
-										alt="$SITE_NAME"
-									/>
+									<img src={require("../images/logo.png")} alt="$SITE_NAME" />
 								</a>
 							</h1>
 
@@ -64,39 +57,26 @@ const Header = () => {
 										alignItems: "center",
 									}}
 								>
-									<li className={url === "/" && "active"}>
+									<li className={url === "/" ? "active" : undefined}>
 										<a href="/">Home</a>
 									</li>
-									<li
-										className={
-											url === "/coupon" && "active"
-										}
-									>
+									<li className={url === "/coupon" ? "active" : undefined}>
 										<a href="/coupon">Vouchers</a>
 									</li>
 
-									<li className={url === "/blog" && "active"}>
+									<li className={url === "/blog" ? "active" : undefined}>
 										<a href="/blog">Blog</a>
 									</li>
 									<li
-										className={
-											url === "/my-coupon" && "active"
-										}
+										className={url === "/my-coupon" ? "active" : undefined}
 										style={{
 											display: "flex",
 											gap: "0.25rem",
 										}}
 									>
-										<a href="/my-coupon?page=1">
-											My vouchers
-										</a>
+										<a href="/my-coupon?page=1">My vouchers</a>
 										<i className="icon iPickRed lbl-count">
-											<span>
-												{
-													vouchersData["my-coupon"]
-														.length
-												}
-											</span>
+											<span>{vouchersData["my-coupon"].length}</span>
 										</i>
 									</li>
 								</ul>

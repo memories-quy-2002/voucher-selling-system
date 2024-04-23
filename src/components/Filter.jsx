@@ -1,9 +1,22 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ReactSlider from "react-slider";
 
+
+const categories = ["Beverages", "Books", "Foods", "Health Care", "Coupon Codes", "Recipes"]
+
 const Filter = () => {
-	const [daysLeft, setDaysLeft] = useState([1, 160]);
+	const navigate = useNavigate()
+	const url = new URLSearchParams(window.location.search);
+
 	const [show, setShow] = useState(false);
+	const [daysLeft, setDaysLeft] = useState([1, 160])
+	const [searchTerm, setSearchTerm] = useState(url.get("searchTerm"))
+
+	const handleSubmit = () => {
+		navigate(`/coupon?days=${daysLeft[0]}-${daysLeft[1]}${searchTerm.length < 1 ? '' : `&searchTerm=${searchTerm}`}`)
+		window.location.reload(false)
+	}
 	return (
 		<div id="sys_mod_filter" className="mod-filter">
 			<div className="grid_frame">
@@ -15,6 +28,8 @@ const Filter = () => {
 								id="sys_txt_search"
 								type="search"
 								placeholder="Search"
+								value={searchTerm}
+								onChange={(e) => setSearchTerm(e.target.value)}
 							/>
 							<button type="submit" className="btn-search" />
 						</div>
@@ -40,48 +55,11 @@ const Filter = () => {
 										All Categories
 									</div>
 									<div className="wrap-list-cate clearfix">
-										<a href="/" data-cate-id={1}>
-											Baby &amp; Toddler
-										</a>
-										<a href="/" data-cate-id={2}>
-											Automotive{" "}
-										</a>
-										<a href="/" data-cate-id={3}>
-											Beverages
-										</a>
-										<a href="/" data-cate-id={4}>
-											Books &amp; Magazines
-										</a>
-										<a href="/" data-cate-id={5}>
-											Foods{" "}
-										</a>
-										<a href="/" data-cate-id={6}>
-											Health Care
-										</a>
-										<a href="/" data-cate-id={7}>
-											Home Entertainment
-										</a>
-										<a href="/" data-cate-id={8}>
-											Personal Care{" "}
-										</a>
-										<a href="/" data-cate-id={9}>
-											Pet Care{" "}
-										</a>
-										<a href="/" data-cate-id={10}>
-											Professional Services{" "}
-										</a>
-										<a href="/" data-cate-id={11}>
-											Toys and Games
-										</a>
-										<a href="/" data-cate-id={12}>
-											Coupon Codes
-										</a>
-										<a href="/" data-cate-id={13}>
-											Recipes
-										</a>
-										<a href="/" data-cate-id={14}>
-											Household{" "}
-										</a>
+										{categories.map((category, index) =>
+											<a key={index} href={`/coupon?category=${category.replace(" ", "-").toLowerCase()} `} data-cate-id={index}>
+												{category}
+											</a>)}
+
 									</div>
 								</div>
 							)}
@@ -128,8 +106,9 @@ const Filter = () => {
 						<input
 							id="sys_apply_filter"
 							className="btn btn-red type-1 btn-apply-filter"
-							type="button"
-							defaultValue="Apply Filter"
+							type="submit"
+							value="Apply Filter"
+							onClick={() => handleSubmit()}
 						/>
 					</div>
 				</div>

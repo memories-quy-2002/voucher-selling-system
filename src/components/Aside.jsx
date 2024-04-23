@@ -25,84 +25,22 @@ const Aside = () => {
 					<h3 className="title-block">Popular store</h3>
 					<div className="block-content">
 						<div className="wrap-list-store clearfix">
-							<a className="brand-logo" href="#">
-								<span className="wrap-logo">
-									<span className="center-img">
-										<span className="ver_hold" />
-										<span className="ver_container">
-											<img
-												src={require("../images/ex/04-07.jpg")}
-												alt="$BRAND_NAME"
-											/>
+							{["08", "09", "10", "11", "12", "13"].map((brand) =>
+								<a className="brand-logo" href="/brand">
+									<span className="wrap-logo">
+										<span className="center-img">
+											<span className="ver_hold" />
+											<span className="ver_container">
+												<img
+													src={require(`../images/ex/01_${brand}.jpg`)}
+													alt="$BRAND_NAME"
+												/>
+											</span>
 										</span>
 									</span>
-								</span>
-							</a>
-							<a className="brand-logo" href="#">
-								<span className="wrap-logo">
-									<span className="center-img">
-										<span className="ver_hold" />
-										<span className="ver_container">
-											<img
-												src={require("../images/ex/04-12.jpg")}
-												alt="$BRAND_NAME"
-											/>
-										</span>
-									</span>
-								</span>
-							</a>
-							<a className="brand-logo" href="#">
-								<span className="wrap-logo">
-									<span className="center-img">
-										<span className="ver_hold" />
-										<span className="ver_container">
-											<img
-												src={require("../images/ex/04-11.jpg")}
-												alt="$BRAND_NAME"
-											/>
-										</span>
-									</span>
-								</span>
-							</a>
-							<a className="brand-logo" href="#">
-								<span className="wrap-logo">
-									<span className="center-img">
-										<span className="ver_hold" />
-										<span className="ver_container">
-											<img
-												src={require("../images/ex/04-10.jpg")}
-												alt="$BRAND_NAME"
-											/>
-										</span>
-									</span>
-								</span>
-							</a>
-							<a className="brand-logo" href="#">
-								<span className="wrap-logo">
-									<span className="center-img">
-										<span className="ver_hold" />
-										<span className="ver_container">
-											<img
-												src={require("../images/ex/04-09.jpg")}
-												alt="$BRAND_NAME"
-											/>
-										</span>
-									</span>
-								</span>
-							</a>
-							<a className="brand-logo" href="#">
-								<span className="wrap-logo">
-									<span className="center-img">
-										<span className="ver_hold" />
-										<span className="ver_container">
-											<img
-												src={require("../images/ex/04-08.jpg")}
-												alt="$BRAND_NAME"
-											/>
-										</span>
-									</span>
-								</span>
-							</a>
+								</a>
+							)}
+
 						</div>
 					</div>
 				</div>
@@ -249,24 +187,27 @@ const Aside = () => {
 				<div className="mod-popular-tag block">
 					<h3 className="title-block">Popular Tag</h3>
 					<div className="block-content">
-						<a className="btn btn-gray type-tag" href="#">
+						<button className="btn btn-gray type-tag">
 							Sweet
-						</a>
-						<a className="btn btn-gray type-tag" href="#">
-							Lindor
-						</a>
-						<a className="btn btn-gray type-tag" href="#">
-							Food
-						</a>
-						<a className="btn btn-gray type-tag" href="#">
-							Lindt
-						</a>
-						<a className="btn btn-gray type-tag" href="#">
-							Walmart
-						</a>
-						<a className="btn btn-gray type-tag" href="#">
-							Chocolate
-						</a>
+						</button>
+						<button className="btn btn-gray type-tag">
+							Saigon Tourist
+						</button>
+						<button className="btn btn-gray type-tag">
+							Udemy
+						</button>
+						<button className="btn btn-gray type-tag">
+							Coursera
+						</button>
+						<button className="btn btn-gray type-tag">
+							Muong Thanh
+						</button>
+						<button className="btn btn-gray type-tag">
+							Education
+						</button>
+						<button className="btn btn-gray type-tag">
+							Restaurant
+						</button>
 					</div>
 				</div>
 			</div>
