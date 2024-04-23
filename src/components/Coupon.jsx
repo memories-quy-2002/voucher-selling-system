@@ -10,8 +10,7 @@ const Coupon = () => {
 	const id = parseInt(url.get("id"));
 	const name = url.get("searchTerm") ? url.get("searchTerm") : undefined;
 	const parts = url.get("days") ? url.get("days").split("-") : undefined;
-	const daysLeft = [parseInt(parts[0], 10), parseInt(parts[1], 10)];
-
+	const daysLeft = parts ? [parseInt(parts[0], 10), parseInt(parts[1], 10)] : [1, 160];
 	const [isNewCoupon, setIsNewCoupon] = useState(id === 2 ? false : true);
 	const [couponsData, setCouponsData] = useState({
 		new: [],
@@ -36,7 +35,6 @@ const Coupon = () => {
 				foundCoupon.isTaken = true;
 				updatedCoupons["my-coupon"].push(foundCoupon);
 				setCouponsData(updatedCoupons); // Update state with modified data
-				console.log(updatedCoupons);
 				const response = await axios.post(
 					"http://localhost:4000/api/update",
 					updatedCoupons
@@ -57,7 +55,6 @@ const Coupon = () => {
 	};
 
 	const onDismissCoupon = async (couponId) => {
-		console.log(couponId);
 		const updatedCoupons = { ...couponsData }; // Create a copy
 		const foundCoupon =
 			updatedCoupons.new.find((coupon) => coupon.id === couponId) ||
@@ -67,12 +64,10 @@ const Coupon = () => {
 				foundCoupon.isTaken = false;
 				const index = updatedCoupons["my-coupon"].indexOf(foundCoupon);
 				const newCoupons = updatedCoupons["my-coupon"].splice(index, 1);
-				console.log("New coupons: ", newCoupons);
 				setCouponsData((previousCoupons) => ({
 					...previousCoupons,
 					"my-coupon": newCoupons,
 				}));
-				console.log(couponsData);
 				const response = await axios.post(
 					"http://localhost:4000/api/delete",
 					couponsData
@@ -161,14 +156,26 @@ const Coupon = () => {
 									<div
 										className={`tab-content-item ${!isNewCoupon && "active"}`}
 									>
-										{couponsData.featured.map((coupon) => (
-											<CouponItem
-												key={coupon.id}
-												coupon={coupon}
-												onTakeCoupon={() => onTakeCoupon(coupon.id)}
-												onDismissCoupon={() => onDismissCoupon(coupon.id)}
-											/>
-										))}
+										{couponsData.featured.filter(
+											(coupon) =>
+												coupon.days >= daysLeft[0] &&
+												coupon.days <= daysLeft[1]
+										)
+											.filter((coupon) => {
+												if (name)
+													return coupon.name
+														.toLowerCase()
+														.includes(name.toLowerCase());
+												else return true;
+											})
+											.map((coupon) => (
+												<CouponItem
+													key={coupon.id}
+													coupon={coupon}
+													onTakeCoupon={() => onTakeCoupon(coupon.id)}
+													onDismissCoupon={() => onDismissCoupon(coupon.id)}
+												/>
+											))}
 										{/*end: .coupon-item */}
 									</div>
 								</div>

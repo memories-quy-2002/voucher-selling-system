@@ -30,7 +30,6 @@ const HomePage = () => {
 				foundCoupon.isTaken = true;
 				updatedCoupons["my-coupon"].push(foundCoupon);
 				setCouponsData(updatedCoupons); // Update state with modified data
-				console.log(updatedCoupons);
 				const response = await axios.post(
 					"http://localhost:4000/api/update",
 					updatedCoupons
@@ -63,12 +62,10 @@ const HomePage = () => {
 				// );
 				const index = updatedCoupons["my-coupon"].indexOf(foundCoupon);
 				const newCoupons = updatedCoupons["my-coupon"].splice(index, 1);
-				console.log("New coupons: ", newCoupons);
 				setCouponsData((previousCoupons) => ({
 					...previousCoupons,
 					"my-coupon": newCoupons,
 				}));
-				console.log(couponsData);
 				const response = await axios.post(
 					"http://localhost:4000/api/delete",
 					couponsData

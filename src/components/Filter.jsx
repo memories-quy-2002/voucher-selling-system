@@ -8,13 +8,14 @@ const categories = ["Beverages", "Books", "Foods", "Health Care", "Coupon Codes"
 const Filter = () => {
 	const navigate = useNavigate()
 	const url = new URLSearchParams(window.location.search);
-
+	const searchURL = url.get("searchTerm") ? url.get("searchTerm") : ''
 	const [show, setShow] = useState(false);
 	const [daysLeft, setDaysLeft] = useState([1, 160])
-	const [searchTerm, setSearchTerm] = useState(url.get("searchTerm"))
+	const [searchTerm, setSearchTerm] = useState(searchURL)
 
 	const handleSubmit = () => {
-		navigate(`/coupon?days=${daysLeft[0]}-${daysLeft[1]}${searchTerm.length < 1 ? '' : `&searchTerm=${searchTerm}`}`)
+		console.log(daysLeft);
+		navigate(`/coupon?days=${daysLeft[0]}-${daysLeft[1]}${searchTerm.length > 0 ? `&searchTerm=${searchTerm}` : ''}`)
 		window.location.reload(false)
 	}
 	return (

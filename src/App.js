@@ -1,20 +1,18 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Blog from "./components/Blog";
+import BlogDetail from "./components/BlogDetail";
 import Brand from "./components/Brand";
+import BrandDetail from "./components/BrandDetail";
+import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 import Coupon from "./components/Coupon";
-import CouponCode from "./components/CouponCode";
+import CouponDetail from "./components/CouponDetail";
 import HomePage from "./components/HomePage";
 import Login from "./components/Login";
 import MyCoupon from "./components/MyCoupon";
 import Register from "./components/Register";
-import BlogDetail from "./components/BlogDetail";
-import BrandDetail from "./components/BrandDetail";
-import CouponDetail from "./components/CouponDetail";
-import CouponCodeTwo from "./components/CouponCodeTwo";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Cart from "./components/Cart";
-import Checkout from "./components/Checkout";
 
 function App() {
 	return (
@@ -27,8 +25,6 @@ function App() {
 				<Route path="/brand-detail" element={<BrandDetail />} />
 				<Route path="/coupon" element={<Coupon />} />
 				<Route path="/coupon-detail" element={<CouponDetail />} />
-				<Route path="/coupon-code" element={<CouponCode />} />
-				<Route path="/coupon-code-2" element={<CouponCodeTwo />} />
 				<Route path="/my-coupon" element={<MyCoupon />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
